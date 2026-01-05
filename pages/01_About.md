@@ -1,6 +1,7 @@
 ---
-layout: page
-title: "About"
+layout: default
+title: "About - Peter Rigali"
+description: Software engineering, data pipelines, and consulting
 permalink: /about/
 ---
 
@@ -43,5 +44,7 @@ Some content is polished, some is intentionally rough — the emphasis is useful
 - GitHub: [https://github.com/pjrigali](https://github.com/pjrigali)
 
 If something here helps you or sparks an idea, feel free to adapt it for your own use.
+
+---
 
 [Home](https://pjrigali.github.io)
