@@ -38,4 +38,8 @@ If something here helps you or sparks an idea, feel free to adapt it for your ow
 
 ---
 
+#### TODO
+* Resize photo
+
+---
 [Home](https://pjrigali.github.io)
