@@ -1,7 +1,7 @@
 ---
 layout: default
-title: "02_Photo Analysis"
-permalink: /posts/02_PhotoAnalysis
+title: "02_Photo Object Detection"
+permalink: /posts/02_PhotoObjectDetection
 toc: true
 ---
 ## Code Summary: Tiled YOLO Object Detection on Large Images

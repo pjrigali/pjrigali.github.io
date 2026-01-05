@@ -3,7 +3,7 @@ A small repo for updates.
 
 ### Posts
 #### [01_Post](pages/01_From_the_void.md)
-#### [02_Post](pages/02_PhotoAnalysis.md)
+#### [02_Photo Object Detection](pages/02_PhotoObjectDetection.md)
 #### [03_Post](pages/Attempt1.md)
 
 ### About
