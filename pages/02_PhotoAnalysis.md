@@ -74,6 +74,7 @@ This approach is well-suited for:
 It preserves detection accuracy while avoiding GPU memory constraints.
 
 ---
+
 ```[python]
 from ultralytics import YOLO
 from PIL import Image
@@ -231,7 +232,7 @@ for det in filtered_arr:
 Image.fromarray(img_cv2, 'RGB').show()
 ```
 
-![Output Image](assets/DSC00304_detected.jpg)
+![Output Image](/assets/DSC00304_detected.jpg)
 
 ---
 
