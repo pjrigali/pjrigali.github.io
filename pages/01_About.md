@@ -5,6 +5,8 @@ description: Software engineering, data pipelines, and consulting
 permalink: /about/
 ---
 
+![Alaska 2024](/assets/2_DSC9860.JPG)
+
 ## About Me
 
 Hi, I’m **Peter Rigali** — a data engineer/consultant with a strong focus on Python, data pipelines, and cloud infrastructure.
