@@ -7,4 +7,4 @@ permalink: /about
 
 Hello World!
 
-[Home](README.md)
+[Home](https://pjrigali.github.io)
