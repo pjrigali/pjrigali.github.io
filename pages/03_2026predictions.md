@@ -1,9 +1,9 @@
 ---
-title: 03_2026 Predictions
+title: 03_2026 Predictions (in Progress)
 description: TBD
 permalink: /posts/03_2026predictions
 layout: default
-nav_order: 3.03
+nav_order: 2.03
 ---
 # 2026 Predictions
 ## In progress
