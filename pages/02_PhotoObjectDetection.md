@@ -86,7 +86,6 @@ import cv2
 
 model_n = YOLO("yolo11n.pt")
 model_x = YOLO("yolo11x.pt")
-
 path = 'E:\\8_Life\\2025_08_14_France\\DSC00211.JPG'
 path = 'E:\\8_Life\\2025_08_14_France\\DSC00304.JPG'
 image = Image.open(path).rotate(90)
