@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: default
 title: "01_About"
 toc: true
 permalink: /about
