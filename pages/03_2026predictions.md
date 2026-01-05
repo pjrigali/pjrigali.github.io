@@ -1,5 +1,5 @@
 ---
-title: 03_2026 Predictions (in Progress)
+title: 03_2026 Predictions (In Progress)
 description: TBD
 permalink: /posts/03_2026predictions
 layout: default
