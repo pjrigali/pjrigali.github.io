@@ -2,7 +2,7 @@
 A small repo for updates.
 
 # Posts
-#### [01_From the void](01_From the void.md)
+#### [01_Post](01_From the void.md)
 
 ### About
 #### [About](01_About.md)
