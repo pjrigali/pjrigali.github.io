@@ -5,17 +5,6 @@ description: Software engineering, data pipelines, and consulting
 permalink: /about/
 ---
 
-## About This Project
-
-This site is a collection of projects, notes, and experiments focused on software development, data engineering, and problem-solving. It serves as both a personal reference and a place to share practical solutions with others.
-
-The goal is to keep things:
-- **Practical** – real-world examples and usable code  
-- **Clear** – minimal boilerplate, readable explanations  
-- **Reusable** – patterns and tools that can be applied elsewhere  
-
----
-
 ## About Me
 
 Hi, I’m **Peter Rigali** — a data engineer/consultant with a strong focus on Python, data pipelines, and cloud infrastructure.
