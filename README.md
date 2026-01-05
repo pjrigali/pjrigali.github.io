@@ -1,2 +1,3 @@
-# A Blog?
-San Francisco Hates Left Turns
+# San Francisco Hates Left Turns
+A small repo for updates.
+
