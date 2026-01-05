@@ -1,6 +1,7 @@
-theme: jekyll-theme-cayman
+# theme: jekyll-theme-cayman
 title: Homepage
 description: Scribbles/Notes
+url: https://pjrigali.github.io/
 # theme: just-the-docs
 # remote_theme: pages-themes/cayman@v0.2.0
 remote_theme: just-the-docs/just-the-docs
