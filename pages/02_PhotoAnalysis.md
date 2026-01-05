@@ -236,4 +236,11 @@ Image.fromarray(img_cv2, 'RGB').show()
 
 ---
 
+#### TODO
+* Remove extra code
+* Split up code blocks
+* Personalize description
+
+---
+
 [Home](https://pjrigali.github.io)
