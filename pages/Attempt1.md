@@ -6,4 +6,4 @@ layout: default
 ---
 Temp
 
-[Home](https://pjrigali.github.io/)
+[Home](https://pjrigali.github.io)
