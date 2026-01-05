@@ -5,6 +5,7 @@ url: https://pjrigali.github.io/
 # theme: just-the-docs
 # remote_theme: pages-themes/cayman@v0.2.0
 remote_theme: just-the-docs/just-the-docs
+enable_copy_code_button: true
 plugins:
 - jekyll-remote-theme
 - jekyll-default-layout

@@ -77,7 +77,7 @@ It preserves detection accuracy while avoiding GPU memory constraints.
 
 ---
 
-```[python]
+```python
 from ultralytics import YOLO
 from PIL import Image
 import numpy as np
