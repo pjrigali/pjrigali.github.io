@@ -8,4 +8,4 @@ toc: true
 ## In progress
 First post!
 
-[Home](README.md)
+[Home](/README.md)
