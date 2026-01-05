@@ -7,3 +7,5 @@ permalink: /about
 # About
 ## About (but smaller)
 Hello World!
+
+[Home](README.md)
