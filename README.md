@@ -5,8 +5,6 @@ A small repo for updates.
 {:toc}
 
 # About
-## [01_About](01_About.md)
-# Confused
-#### Confused but smaller
-# Yes
-#### Yesssss
+#### [01_About](01_About.md)
+# Posts
+#### [_posts/2025_01_04_01_From the void](2025_01_04_01_From the void.md)
