@@ -1,7 +1,7 @@
 ---
-title: 2026 Predictions
+title: 03_2026 Predictions
 description: TBD
-permalink: /posts/2026predictions
+permalink: /posts/03_2026predictions
 layout: default
 ---
 Temp
