@@ -1,6 +1,6 @@
 ---
 title: Home
-layout: home
+layout: default
 ---
 
 # San Francisco Hates Left Turns
