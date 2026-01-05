@@ -3,6 +3,7 @@ layout: default
 title: "About - Peter Rigali"
 description: Software engineering, data pipelines, and consulting
 permalink: /about/
+nav_order: 2
 ---
 
 ![Alaska 2024](/assets/2_DSC9860.JPG)

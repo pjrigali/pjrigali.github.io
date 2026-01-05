@@ -3,8 +3,9 @@ layout: default
 title: "02_Photo Object Detection"
 description: Performs high-resolution object detection by tiling a large image, running YOLO inference on each tile, merging detections into original image coordinates, and removing duplicates with non-maximum suppression.
 permalink: /posts/02_PhotoObjectDetection
-toc: true
+nav_order: 4
 ---
+
 ## Code Summary: Tiled YOLO Object Detection on Large Images
 
 This script performs object detection on a high-resolution image by splitting it into tiles, running YOLO inference on each tile, and merging the results back into a single set of detections.
