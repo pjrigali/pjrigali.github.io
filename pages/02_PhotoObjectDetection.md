@@ -91,7 +91,6 @@ import cv2
 model_n = YOLO("yolo11n.pt") # Small
 model_x = YOLO("yolo11x.pt") # XL
 path = 'E:\\8_Life\\2025_08_14_France\\DSC00304.JPG'
-image = Image.open(path).rotate(90)
 ```
 
 Functions applied.
@@ -217,7 +216,8 @@ final_detections = apply_nms(all_detections, iou_threshold=0.50)
 print(f"Found {len(final_detections)} unique detections after NMS.")
 ```
 
-```Tiling image...
+```
+Tiling image...
 Generated 35 tiles.
 Running predictions on tiles...
 Found 34 total detections before NMS.
@@ -250,6 +250,8 @@ Lets take a look!
 * ~~Split up code blocks~~
 * ~~Personalize description~~
 * Spell check
+* Looks like YOLO doesn't detect flags.
+
 ---
 
 [Home](https://pjrigali.github.io)
