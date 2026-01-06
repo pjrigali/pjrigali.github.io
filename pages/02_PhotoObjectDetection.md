@@ -8,12 +8,14 @@ nav_order: 2.02
 
 ## Code Summary: Tiled YOLO Object Detection on Large Images
 
+Here's the deal, I've been taking photos for nearly 10 years. Amounting in just over 30k photos from various sources (Iphone, Sony, Nikon, Etc). Wouldnt it bne interesting to tag these photos to create a searchable repo for what's being captured? Maybe, here we go.
+
 This script performs object detection on a high-resolution image by splitting it into tiles, running YOLO inference on each tile, and merging the results back into a single set of detections.
 
 ### Overview
 
-- Uses **Ultralytics YOLO** models (`yolo11n` and `yolo11x`) for object detection.
-- Handles **large images** by tiling them into fixed-size patches.
+- Uses **Ultralytics YOLO** models (`yolo11n` and `yolo11x`) for object detection. _(Your mileage my very, but when the largest yolo model is only 100 mbs, why not use it. We arent pushing to prod.)_
+- Handles **large images** by tiling them into fixed-size patches. _(This is important due to YOLO resizing the images to 640x640, That majority of my phots were taken with full frame camera, thus much larger.)_
 - Reassembles detections into original image coordinates.
 - Removes duplicate detections using **Non-Maximum Suppression (NMS)**.
 - Visualizes the final detections on the original image.
@@ -29,12 +31,12 @@ This script performs object detection on a high-resolution image by splitting it
 - Uses the Ultralytics YOLO API for prediction.
 
 #### 2. Image Preparation
-- Loads a JPEG image from disk.
-- Converts it to RGB and rotates it 90 degrees for correct orientation.
+- Loads a JPEG image from disk. _(There are other file formats, preprocessing for that is beyond the scope of what im trying to show here. Maybe for the next post.)_
+- Converts it to RGB and rotates it 90 degrees for correct orientation. _(When opened, PIL auto assigns an orintation, this impacts the quality of the object detection. IE, boats are typically sitting on the water.)_
 
 #### 3. Image Tiling
 - Splits the large image into fixed-size tiles (default: **640×640** pixels).
-- Supports configurable overlap between tiles (set to `0` here).
+- Supports configurable overlap between tiles (set to `0` here). _(When tiling, you are left with alot of edge images, slicing objects and adding little value. When you photograph something, it tends to be in the middle, duh.)_
 - Stores each tile along with its `(x, y)` offset in the original image.
 
 #### 4. Tile-Based Inference
@@ -48,7 +50,7 @@ This script performs object detection on a high-resolution image by splitting it
 - Uses an IoU threshold of `0.5`.
 
 #### 6. Confidence Filtering
-- Filters final detections by confidence score (keeps detections with `confidence > 0.50`).
+- Filters final detections by confidence score (keeps detections with `confidence > 0.50`). _(Adjustable, probably should be 80%.)_
 
 #### 7. Visualization
 - Draws bounding boxes and class labels on the original image using OpenCV.
@@ -70,13 +72,14 @@ This script performs object detection on a high-resolution image by splitting it
 
 This approach is well-suited for:
 - High-resolution photography
-- Satellite or aerial imagery
+- Allows collection of image objects
 - Any image too large for direct YOLO inference at native resolution
 
 It preserves detection accuracy while avoiding GPU memory constraints.
 
 ---
 
+Lets do some imports.
 ```python
 from ultralytics import YOLO
 from PIL import Image
@@ -85,13 +88,15 @@ import torch
 import cv2
 
 
-model_n = YOLO("yolo11n.pt")
-model_x = YOLO("yolo11x.pt")
-path = 'E:\\8_Life\\2025_08_14_France\\DSC00211.JPG'
+model_n = YOLO("yolo11n.pt") # Small
+model_x = YOLO("yolo11x.pt") # XL
 path = 'E:\\8_Life\\2025_08_14_France\\DSC00304.JPG'
 image = Image.open(path).rotate(90)
+```
 
+Functions applied.
 
+```python
 def tile_image(image: Image.Image, tile_size: int, overlap: int):
     """Splits an image into overlapping tiles."""
     img_width, img_height = image.size
@@ -168,14 +173,6 @@ def apply_nms(detections, iou_threshold=0.5):
     boxes = detections[:, :4]
     scores = detections[:, 4]
     classes = detections[:, 5]
-
-    # Use a standard NMS implementation. We can leverage an existing one if available
-    # or implement a simple version if not using a specific NMS library.
-    # For a robust solution, it is better to use a library function (e.g., from torchvision or a custom one)
-    # A simple NMS function is complex to write and integrate here.
-    
-    # The ultralytics library provides an NMS function internally that can be called via the model.predict args (agnostic_nms=True, iou=0.5)
-    # However, that applies per-tile. We need NMS across all detections combined.
     
     # Convert numpy arrays to torch tensors
     boxes_tensor = torch.from_numpy(boxes)
@@ -203,9 +200,12 @@ def apply_nms(detections, iou_threshold=0.5):
 
 large_image = Image.open(path).convert("RGB").rotate(90)
 TILE_SIZE = 640  # Standard YOLO input size
-OVERLAP = 0
+OVERLAP = 0 # No overlap
+```
 
+Fancy print statements.
 
+```python
 print("Tiling image...")
 tiles = tile_image(large_image, TILE_SIZE, OVERLAP)
 print(f"Generated {len(tiles)} tiles.")
@@ -215,10 +215,18 @@ print(f"Found {len(all_detections)} total detections before NMS.")
 print("Applying Non-Maximum Suppression...")
 final_detections = apply_nms(all_detections, iou_threshold=0.50)
 print(f"Found {len(final_detections)} unique detections after NMS.")
+```
 
+```Tiling image...
+Generated 35 tiles.
+Running predictions on tiles...
+Found 34 total detections before NMS.
+Applying Non-Maximum Suppression...
+Found 29 unique detections after NMS.
+```
 
+```python
 # Filter Detections:
-# final_detections = np.array([i for i in final_detections if i[4] > 0.75])
 filtered_arr = final_detections[final_detections[:, 4] > 0.50]
 
 img_cv2 = cv2.cvtColor(np.array(large_image), cv2.COLOR_RGB2BGR)
@@ -232,15 +240,16 @@ for det in filtered_arr:
 
 Image.fromarray(img_cv2, 'RGB').show()
 ```
+Lets take a look!
 
 ![Output Image](/assets/DSC00304_detected.jpg)
 
 ---
 
 #### TODO
-* Remove extra code
-* Split up code blocks
-* Personalize description
+* ~~Remove extra code~~
+* ~~Split up code blocks~~
+* ~~Personalize description~~
 
 ---
 
