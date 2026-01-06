@@ -14,8 +14,8 @@ This script performs object detection on a high-resolution image by splitting it
 
 ### Overview
 
-- Uses **Ultralytics YOLO** models (`yolo11n` and `yolo11x`) for object detection. _(Your mileage my very, but when the largest yolo model is only 100 mbs, why not use it. We arent pushing to prod.)_
-- Handles **large images** by tiling them into fixed-size patches. _(This is important due to YOLO resizing the images to 640x640, That majority of my phots were taken with full frame camera, thus much larger.)_
+- Uses **Ultralytics YOLO** models (`yolo11n` and `yolo11x`) for object detection. _(Your mileage my vary, but when the largest yolo model is only 100 mbs, why not use it. We arent pushing to prod.)_
+- Handles **large images** by tiling them into fixed-size patches. _(This is important due to YOLO resizing the images to 640x640, That majority of my photos were taken with full frame camera, thus much larger.)_
 - Reassembles detections into original image coordinates.
 - Removes duplicate detections using **Non-Maximum Suppression (NMS)**.
 - Visualizes the final detections on the original image.
@@ -32,7 +32,7 @@ This script performs object detection on a high-resolution image by splitting it
 
 #### 2. Image Preparation
 - Loads a JPEG image from disk. _(There are other file formats, preprocessing for that is beyond the scope of what im trying to show here. Maybe for the next post.)_
-- Converts it to RGB and rotates it 90 degrees for correct orientation. _(When opened, PIL auto assigns an orintation, this impacts the quality of the object detection. IE, boats are typically sitting on the water.)_
+- Converts it to RGB and rotates it 90 degrees for correct orientation. _(When opened, PIL auto assigns an orientation, this impacts the quality of the object detection. IE., boats are typically sitting on the water.)_
 
 #### 3. Image Tiling
 - Splits the large image into fixed-size tiles (default: **640×640** pixels).
@@ -231,7 +231,6 @@ filtered_arr = final_detections[final_detections[:, 4] > 0.50]
 
 img_cv2 = cv2.cvtColor(np.array(large_image), cv2.COLOR_RGB2BGR)
 for det in filtered_arr:
-    # x1, y1, x2, y2, conf, cls = map(int, det[:6])
     x1, y1, x2, y2 = map(int, det[:4])
     conf, cls = det[4], det[5]
     label = f"{model_x.names[cls]}: {conf:.2f}"
@@ -250,7 +249,7 @@ Lets take a look!
 * ~~Remove extra code~~
 * ~~Split up code blocks~~
 * ~~Personalize description~~
-
+* Spell check
 ---
 
 [Home](https://pjrigali.github.io)
