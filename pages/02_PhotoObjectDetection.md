@@ -8,7 +8,7 @@ nav_order: 2.02
 
 ## Code Summary: Tiled YOLO Object Detection on Large Images
 
-Here's the deal, I've been taking photos for nearly 10 years. Amounting in just over 30k photos from various sources (Iphone, Sony, Nikon, Etc). Wouldnt it bne interesting to tag these photos to create a searchable repo for what's being captured? Maybe, here we go.
+Here's the deal, I've been taking photos for nearly 10 years. Amounting for just over 30k photos from various sources (Iphone, Sony, Nikon, Etc). Wouldn't it be interesting to tag these photos to create a searchable repo for what's being captured? Maybe, here we go.
 
 This script performs object detection on a high-resolution image by splitting it into tiles, running YOLO inference on each tile, and merging the results back into a single set of detections.
 
