@@ -5,3 +5,5 @@ permalink: /posts/04_Salesforce_Dedup
 layout: default
 nav_order: 2.04
 ---
+## Salesforce Record Deduplication
+### High-level thoughts and considerations.
