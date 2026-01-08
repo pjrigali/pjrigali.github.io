@@ -182,54 +182,55 @@ A few caveats, words like AI or Anchor (Probably **Anchored**) could be part of 
 
 Key standouts are where Pct_said is greater or less than the Cost.
 
-| Word                    | Cost | Said | Not Said | Count | Pct Said |
-|-------------------------|------|------|----------|-------|----------|
-| Egg                     | 0.05 | 0    | 43       | 0     | 0.0      |
-| Trade War               | 0.05 | 0    | 43       | 0     | 0.0      |
-| Soft Landing            | 0.07 | 4    | 39       | 8     | 0.093    |
-| Bitcoin                 | 0.07 | 2    | 41       | 2     | 0.047    |
-| National Debt           | 0.08 | 0    | 43       | 0     | 0.0      |
-| ADP                     | 0.09 | 1    | 42       | 1     | 0.023    |
-| Stagflation             | 0.10 | 1    | 42       | 3     | 0.023    |
-| Anchor                  | 0.11 | 42   | 1        | 113   | 0.977    |
-| Gold                    | 0.12 | 1    | 42       | 1     | 0.023    |
-| Pardon                  | 0.13 | 5    | 38       | 6     | 0.116    |
-| Trump                   | 0.14 | 2    | 41       | 2     | 0.047    |
-| Gas                     | 0.16 | 10   | 33       | 18    | 0.233    |
-| Gasoline                | 0.16 | 7    | 36       | 9     | 0.163    |
-| Natural Gas             | 0.16 | 1    | 42       | 2     | 0.023    |
-| Yield Curve             | 0.16 | 6    | 37       | 11    | 0.14     |
-| Consumer Confidence     | 0.18 | 3    | 40       | 3     | 0.07     |
-| Dot Plot                | 0.20 | 5    | 38       | 9     | 0.116    |
-| Recession               | 0.23 | 23   | 20       | 56    | 0.535    |
-| QE                      | 0.24 | 6    | 37       | 8     | 0.14     |
-| Quantitative Easing     | 0.24 | 4    | 39       | 4     | 0.093    |
-| Tax                     | 0.31 | 7    | 36       | 13    | 0.163    |
-| Beige Book              | 0.33 | 6    | 37       | 10    | 0.14     |
-| Volatility              | 0.35 | 6    | 37       | 8     | 0.14     |
-| Probability             | 0.36 | 7    | 36       | 8     | 0.163    |
-| QT                      | 0.40 | 11   | 32       | 15    | 0.256    |
-| Quantitative Tightening | 0.40 | 0    | 43       | 0     | 0.0      |
-| Median                  | 0.42 | 30   | 13       | 160   | 0.698    |
-| Dissent                 | 0.42 | 7    | 36       | 19    | 0.163    |
-| Projection              | 0.50 | 29   | 14       | 180   | 0.674    |
-| Pandemic                | 0.57 | 41   | 2        | 234   | 0.953    |
-| Shutdown                | 0.59 | 12   | 31       | 21    | 0.279    |
-| Shut Down               | 0.59 | 2    | 41       | 3     | 0.047    |
-| Tariff Inflation        | 0.59 | 4    | 39       | 13    | 0.093    |
-| Softening               | 0.61 | 19   | 24       | 51    | 0.442    |
-| Credit                  | 0.63 | 22   | 21       | 99    | 0.512    |
-| Goods inflation         | 0.69 | 12   | 31       | 33    | 0.279    |
-| AI                      | 0.80 | 43   | 0        | 2966  | 1.0      |
-| Artificial Intelligence | 0.80 | 1    | 42       | 1     | 0.023    |
-| Layoff                  | 0.83 | 11   | 32       | 25    | 0.256    |
-| Balance Sheet           | 0.84 | 39   | 4        | 183   | 0.907    |
-| Uncertainty             | 0.84 | 34   | 9        | 112   | 0.791    |
-| Restrictive             | 0.85 | 30   | 13       | 199   | 0.698    |
-| Unchanged               | 0.89 | 18   | 25       | 21    | 0.419    |
-| Balance of Risk         | 0.94 | 24   | 19       | 66    | 0.558    |
-| Expectation             | 0.95 | 43   | 0        | 322   | 1.0      |
-| Good Afternoon          | 0.97 | 43   | 0        | 43    | 1.0      |
+| Word                    | Cost | Pct Said | Said | Not Said | Count |
+|-------------------------|------|----------|------|----------|-------|
+| Egg                     | 0.05 | 0.0      | 0    | 43       | 0     |
+| Trade War               | 0.05 | 0.0      | 0    | 43       | 0     |
+| Soft Landing            | 0.07 | 0.093    | 4    | 39       | 8     |
+| Bitcoin                 | 0.07 | 0.047    | 2    | 41       | 2     |
+| National Debt           | 0.08 | 0.0      | 0    | 43       | 0     |
+| ADP                     | 0.09 | 0.023    | 1    | 42       | 1     |
+| Stagflation             | 0.10 | 0.023    | 1    | 42       | 3     |
+| Anchor                  | 0.11 | 0.977    | 42   | 1        | 113   |
+| Gold                    | 0.12 | 0.023    | 1    | 42       | 1     |
+| Pardon                  | 0.13 | 0.116    | 5    | 38       | 6     |
+| Trump                   | 0.14 | 0.047    | 2    | 41       | 2     |
+| Gas                     | 0.16 | 0.233    | 10   | 33       | 18    |
+| Gasoline                | 0.16 | 0.163    | 7    | 36       | 9     |
+| Natural Gas             | 0.16 | 0.023    | 1    | 42       | 2     |
+| Yield Curve             | 0.16 | 0.14     | 6    | 37       | 11    |
+| Consumer Confidence     | 0.18 | 0.07     | 3    | 40       | 3     |
+| Dot Plot                | 0.20 | 0.116    | 5    | 38       | 9     |
+| Recession               | 0.23 | 0.535    | 23   | 20       | 56    |
+| QE                      | 0.24 | 0.14     | 6    | 37       | 8     |
+| Quantitative Easing     | 0.24 | 0.093    | 4    | 39       | 4     |
+| Tax                     | 0.31 | 0.163    | 7    | 36       | 13    |
+| Beige Book              | 0.33 | 0.14     | 6    | 37       | 10    |
+| Volatility              | 0.35 | 0.14     | 6    | 37       | 8     |
+| Probability             | 0.36 | 0.163    | 7    | 36       | 8     |
+| QT                      | 0.40 | 0.256    | 11   | 32       | 15    |
+| Quantitative Tightening | 0.40 | 0.0      | 0    | 43       | 0     |
+| Median                  | 0.42 | 0.698    | 30   | 13       | 160   |
+| Dissent                 | 0.42 | 0.163    | 7    | 36       | 19    |
+| Projection              | 0.50 | 0.674    | 29   | 14       | 180   |
+| Pandemic                | 0.57 | 0.953    | 41   | 2        | 234   |
+| Shutdown                | 0.59 | 0.279    | 12   | 31       | 21    |
+| Shut Down               | 0.59 | 0.047    | 2    | 41       | 3     |
+| Tariff Inflation        | 0.59 | 0.093    | 4    | 39       | 13    |
+| Softening               | 0.61 | 0.442    | 19   | 24       | 51    |
+| Credit                  | 0.63 | 0.512    | 22   | 21       | 99    |
+| Goods inflation         | 0.69 | 0.279    | 12   | 31       | 33    |
+| AI                      | 0.80 | 1.0      | 43   | 0        | 2966  |
+| Artificial Intelligence | 0.80 | 0.023    | 1    | 42       | 1     |
+| Layoff                  | 0.83 | 0.256    | 11   | 32       | 25    |
+| Balance Sheet           | 0.84 | 0.907    | 39   | 4        | 183   |
+| Uncertainty             | 0.84 | 0.791    | 34   | 9        | 112   |
+| Restrictive             | 0.85 | 0.698    | 30   | 13       | 199   |
+| Unchanged               | 0.89 | 0.419    | 18   | 25       | 21    |
+| Balance of Risk         | 0.94 | 0.558    | 24   | 19       | 66    |
+| Expectation             | 0.95 | 1.0      | 43   | 0        | 322   |
+| Good Afternoon          | 0.97 | 1.0      | 43   | 0        | 43    |
+
 
 ## Next Steps
 Further analysis can be done around the following question: 
