@@ -9,7 +9,7 @@ nav_order: 2.05
 
 > [Kalshi: Expected Words Said](https://kalshi.com/markets/kxfedmention/fed-mention/kxfedmention-26jan)
 
-Essentially, what we are looking to dtermine the likelyhood Jerome Powell will say certian words.
+Essentially, what we are looking to determine the likelyhood Jerome Powell will say certian words.
 
 > [Kalshi: Expected Rate Change](https://kalshi.com/markets/kxfeddecision/fed-meeting/kxfeddecision-26jan)
 
@@ -177,8 +177,6 @@ The script combines **natural language analysis** of Fed press conferences with 
 ## Results
 
 Since the markets work in a binary function, the cost can be inferred as the percent likelyhood the word or phase will be said. This means where there is a delta between Cost and Pct Said, we have some alpha.
-
-High level, its clear that there are words/phases Powell has decided not to say. We know he is very cautious about what he says so this sorta makes sense.
 
 A few caveats, words like AI or Anchor (Probably **Anchored**) could be part of other words. Be mindful of that, the searching for the word in the speeches does not factor this in.
 
