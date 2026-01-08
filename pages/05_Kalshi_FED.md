@@ -238,3 +238,4 @@ Further analysis can be done around the following question:
 - Use regex to find the words witj '\b {word} \b', Eliminating if the word is apart of other words.
 - Words used in recent/previous, predictive of next statement.
 - Words used in other types of recent releases.
+- Does time of year matter?
