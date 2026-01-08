@@ -234,4 +234,5 @@ Key standouts are where Pct_said is greater or less than the Cost.
 
 ## Next Steps
 Further analysis can be done around the following question: 
-- *_We are assuming rates will stay the same, what is the word distribution for speeches prior to when the Fed was in that position?_*
+- *We are assuming rates will stay the same, what is the word distribution for speeches prior to when the Fed was in that position?*
+- Use regex to find the words witj '\b {word} \b', Eliminating if the word is apart of other words.
