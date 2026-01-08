@@ -1,5 +1,5 @@
 ---
-title: 05_Kalshi_Fed
+title: 05_Kalshi Jerome Powell Speech Prediction
 description: A test run for predicting Powell verbiage.
 permalink: /posts/05_Kalshi_Fed
 layout: default
