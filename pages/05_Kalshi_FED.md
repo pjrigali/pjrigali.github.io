@@ -236,3 +236,5 @@ Key standouts are where Pct_said is greater or less than the Cost.
 Further analysis can be done around the following question: 
 - *We are assuming rates will stay the same, what is the word distribution for speeches prior to when the Fed was in that position?*
 - Use regex to find the words witj '\b {word} \b', Eliminating if the word is apart of other words.
+- Words used in recent/previous, predictive of next statement.
+- Words used in other types of recent releases.
