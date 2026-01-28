@@ -104,6 +104,14 @@ def apply_vignette(image, strength=0.5, radius_scale=0.8):
 
 ---
 
+## Example Output
+
+Below is an example of the transformation applied to a raw digital photo using the pipeline described above:
+
+![Disposable Camera Effect Example](../assets/disposable_camera_example.png)
+
+*Note: The results vary based on the input image's base lighting and color profile.*
+
 ## Technical Summary
 By combining these modular functions into a single pipeline, we can transform any sharp modern photo into a nostalgic "disposable" memory. The entire process relies on native operations in `cv2` and `numpy`, making it extremely fast and lightweight.
 
