@@ -1,3 +1,11 @@
+---
+title: 07_Face Detection with OpenCV YuNet
+description: Real-time face detection using the YuNet model.
+permalink: /posts/07_Face_Detection
+layout: default
+nav_order: 2.07
+---
+
 # 07_Face Detection with OpenCV YuNet
 
 This project demonstrates real-time face detection using **YuNet**, a high-performance deep learning model from the OpenCV Model Zoo.
@@ -65,3 +73,5 @@ Below is an example of the model detecting a face in a high-resolution image.
 ## Conclusion
 
 YuNet provides a modern, robust alternative to traditional Haar Cascades or HOG-based detectors, making it ideal for edge devices and real-time applications.
+
+*Last Updated: 2026-01-27*
