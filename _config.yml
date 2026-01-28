@@ -3,6 +3,7 @@ description: Scribbles/Notes
 url: https://pjrigali.github.io/
 remote_theme: just-the-docs/just-the-docs
 enable_copy_code_button: true
+favicon_ico: /assets/images/pjr_favicon.png
 plugins:
 - jekyll-remote-theme
 - jekyll-default-layout
