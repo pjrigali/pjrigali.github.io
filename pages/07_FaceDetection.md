@@ -68,7 +68,7 @@ if faces is not None:
 
 Below is an example of the model detecting a face in a high-resolution image.
 
-![Face Detection Example](file:///c:/Users/peter/Desktop/vscode/main/website/pjrigali.github.io/assets/face_detection_example.png)
+![Face Detection Example](../assets/face_detection_example.png)
 
 ## Conclusion
 
