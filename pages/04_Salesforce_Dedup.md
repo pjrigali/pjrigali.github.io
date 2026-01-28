@@ -7,3 +7,15 @@ nav_order: 2.04
 ---
 ## Salesforce Record Deduplication
 ### High-level thoughts and considerations.
+
+---
+
+#### TODO
+- [ ] Outline deduplication objects
+- [ ] Define match rules
+
+---
+
+[Home](https://pjrigali.github.io)
+
+*Last Updated: 2026-01-27*

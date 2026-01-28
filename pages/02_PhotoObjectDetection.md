@@ -255,3 +255,5 @@ Lets take a look!
 ---
 
 [Home](https://pjrigali.github.io)
+
+*Last Updated: 2026-01-27*

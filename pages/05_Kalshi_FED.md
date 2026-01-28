@@ -239,3 +239,15 @@ Further analysis can be done around the following question:
 - Words used in recent/previous, predictive of next statement.
 - Words used in other types of recent releases.
 - Does time of year matter?
+
+---
+
+#### TODO
+- [ ] Refine regex for word boundary matching
+- [ ] Compare with other release types
+
+---
+
+[Home](https://pjrigali.github.io)
+
+*Last Updated: 2026-01-27*

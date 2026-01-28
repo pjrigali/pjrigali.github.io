@@ -74,4 +74,15 @@ Below is an example of the model detecting a face in a high-resolution image.
 
 YuNet provides a modern, robust alternative to traditional Haar Cascades or HOG-based detectors, making it ideal for edge devices and real-time applications.
 
+---
+
+#### TODO
+- [ ] Implement video stream detection
+- [ ] Add face recognition layer
+
+---
+
+[Home](https://pjrigali.github.io)
+
 *Last Updated: 2026-01-27*
+

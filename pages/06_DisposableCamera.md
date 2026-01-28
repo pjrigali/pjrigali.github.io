@@ -115,4 +115,15 @@ Below is an example of the transformation applied to a raw digital photo using t
 ## Technical Summary
 By combining these modular functions into a single pipeline, we can transform any sharp modern photo into a nostalgic "disposable" memory. The entire process relies on native operations in `cv2` and `numpy`, making it extremely fast and lightweight.
 
+---
+
+#### TODO
+- [ ] Add more example photos
+- [ ] Fine-tune grain parameters
+
+---
+
+[Home](https://pjrigali.github.io)
+
 *Last Updated: 2026-01-27*
+
