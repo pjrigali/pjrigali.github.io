@@ -47,6 +47,7 @@ Inexperienced devs love to parrot "loops in Python are slow, use Pandas!" The re
 Reading a single value from a DataFrame is an odyssey through layers of bloat.
 
 **Benchmark: Accessing a single element (1M iterations)**
+
 | Operation | Time (seconds) | Comparison |
 | :--- | :--- | :--- |
 | Dictionary lookup | ~0.05s | The standard. |
@@ -56,6 +57,7 @@ Reading a single value from a DataFrame is an odyssey through layers of bloat.
 If I see `.iterrows()` in a code review, I assume you copied the code from StackOverflow without reading it.
 
 **Benchmark: Summing a column (100k rows)**
+
 | Method | Time (ms) | Speedup | Notes |
 | :--- | :--- | :--- | :--- |
 | **Pandas `.iterrows()`** | **~3,500ms** | 1x | The "Bootcamp Special". |
