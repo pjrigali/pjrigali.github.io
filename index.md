@@ -14,7 +14,8 @@ A small repo for updates and thoughts. Mostly Python.
 #### [04_Record Deduplication Salesforce (In Progress)](pages/04_Salesforce_Dedup.md)
 #### [05_Kalshi Jerome Powell Speech Prediction](pages/05_Kalshi_FED.md)
 #### [06_Disposable Camera Effect](pages/06_DisposableCamera.md)
-#### [06_White House News Scraper](pages/08_WhiteHouseScraper.md)
+#### [07_Face Detection](pages/07_FaceDetection.md)
+#### [08_White House News Scraper](pages/08_WhiteHouseScraper.md)
 
 ### About
 [About](pages/01_About.md)
