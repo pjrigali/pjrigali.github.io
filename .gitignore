@@ -1,2 +1,7 @@
 # Ignore the documentation template
 pages/template.md
+
+# Ignore In-Progress/Draft Pages
+pages/01_From_the_void.md
+pages/03_2026predictions.md
+pages/04_Salesforce_Dedup.md
