@@ -15,6 +15,7 @@ A small repo for updates and thoughts. Mostly Python.
 #### [08_WhiteHouseScraper](pages/08_WhiteHouseScraper.md)
 #### [09_The Death of Pandas](pages/09_Pandas.md)
 #### [10_Kalshi Analysis](pages/10_Kalshi_Analysis.md)
+#### [11_Kalshi Price Impact](pages/11_Kalshi_Price_Impact.md)
 
 ### About
 [About](pages/01_About.md)
