@@ -14,6 +14,7 @@ A small repo for updates and thoughts. Mostly Python.
 #### [07_Face Detection](pages/07_FaceDetection.md)
 #### [08_WhiteHouseScraper](pages/08_WhiteHouseScraper.md)
 #### [09_The Death of Pandas](pages/09_Pandas.md)
+#### [10_Kalshi Analysis](pages/10_Kalshi_Analysis.md)
 
 ### About
 [About](pages/01_About.md)
