@@ -30,17 +30,29 @@ We utilized a **Logistic Regression** model to predict the binary target `is_pro
 
 The model achieved an impressive **93% accuracy** (F1-Score: 0.96 for promoted class), highlighting strong signal in the selected features.
 
-#### Top Promotion Drivers
+#### Top Promotion Drivers (Positive)
 
 The chart below displays the coefficients for the top positive predictors of promotion.
 
-![Top Promotion Drivers](/assets/top_promotion_drivers.png)
+![Top Promotion Drivers](/assets/analysis_1_logistic_0.png)
 
 **Insights:**
 1.  **Level Matters:** Being at `L10` (Senior Analyst) or `L11` (Analyst) serves as a strong springboard for promotion.
 2.  **The 'LLP' Advantage:** The **`entity_LLP`** feature emerged as a top driver, suggesting structural differences in promotion velocity compared to other entities.
 3.  **Specialization Pays Off:** While the broad *Strategy & Consulting* practice is positive, the specific **`sub_practice_Management Consulting`** provides an additional boost.
 4.  **Homegrown Talent:** Employees who started their career at Accenture (`hire_type_Homegrown`) show higher promotion odds than experienced hires.
+
+#### Top Negative Drivers (Promotion Barriers)
+
+While some factors boost promotion odds, others appear to correlate with slower advancement.
+
+![Top Negative Drivers](/assets/analysis_1_logistic_1.png)
+
+**Insights:**
+1.  **Experience Gap:** Higher years of experience (without a corresponding move to senior levels) can sometimes negatively correlate with immediate promotion probability in certain roles.
+2.  **Role Stagnation:** Specific practice alignments or lower sentiment levels (e.g., "Not sure" about staying) strongly correlate with a lower likelihood of promotion.
+3.  **Geographic Factors:** Certain cities exhibit lower promotion rates, potentially due to role availability or competitive saturation in those hubs.
+
 
 ---
 
