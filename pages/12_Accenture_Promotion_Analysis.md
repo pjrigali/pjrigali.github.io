@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Accenture Promotion Analysis"
+title: "12_Accenture Promotion Analysis"
 description: Uncovering key drivers for promotion using the 2021 Accenture Talent Outcome & Comp Survey dataset.
 permalink: /posts/Accenture_Promotion_Analysis
 nav_order: 2.13
