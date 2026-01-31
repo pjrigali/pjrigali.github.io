@@ -8,7 +8,7 @@ nav_order: 2.13
 
 ## Project Overview
 
-This analysis explores the **2021 Accenture Talent Outcome & Comp Survey** dataset to identify what factors most strongly influence promotions. By applying machine learning techniques, we can move beyond anecdotal evidence to quantify the impact of role, location, and entity.
+This analysis explores the **2021-2025 Accenture Talent Outcome & Comp Survey** dataset to identify what factors most strongly influence promotions. By applying machine learning techniques, we can move beyond anecdotal evidence to quantify the impact of role, location, and entity.
 
 The dataset, filtered for USA records, includes standardized fields for City and Practice, along with granular details like `sub_practice` (e.g., Management Consulting) and `entity` (LLP vs AFS).
 
