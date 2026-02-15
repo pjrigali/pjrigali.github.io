@@ -160,22 +160,6 @@ Below is a snapshot of each team's best and worst moves from the Draft and Waive
 
 ---
 
-
-### Methodology
-
-The analysis was conducted using a custom Python pipeline:
-1.  **Data Collection**:
-    *   Daily player statistics (`daily_player_stats_2025.csv`).
-    *   Transaction mapping via `roster_history_2025.csv` to determine if a player stint was from the Draft or Free Agency.
-2.  **Impact Calculation**:
-    *   All 10 scoring categories (R, HR, RBI, SB, OPS, K/9, QS, SVHD, ERA, WHIP) were analyzed.
-    *   **Rate Stats (ERA, WHIP, OPS, K/9)** were converted to "Impact Units" based on volume (e.g., an ERA beater is worth more over 100 IP than 10 IP).
-    *   **Z-Scores** were calculated for each category based on the active player population to standardize value.
-3.  **Aggregation**:
-    *   Z-Scores were summed by Player, Team, and Acquisition Source to determine the "Effective Season Impact".
-
----
-
 ## 5. The 'One That Got Away' Awards (Worst Drops)
 
 These players were on a roster, sent packing, and then immediately made their former managers regret everything.
@@ -191,12 +175,26 @@ These players were on a roster, sent packing, and then immediately made their fo
 
 ---
 
+### Methodology
+
+The analysis was conducted using a custom Python pipeline:
+1.  **Data Collection**:
+    *   Daily player statistics (`daily_player_stats_2025.csv`).
+    *   Transaction mapping via `roster_history_2025.csv` to determine if a player stint was from the Draft or Free Agency.
+2.  **Impact Calculation**:
+    *   All 10 scoring categories (R, HR, RBI, SB, OPS, K/9, QS, SVHD, ERA, WHIP) were analyzed.
+    *   **Rate Stats (ERA, WHIP, OPS, K/9)** were converted to "Impact Units" based on volume (e.g., an ERA beater is worth more over 100 IP than 10 IP).
+    *   **Z-Scores** were calculated for each category based on the active player population to standardize value.
+3.  **Aggregation**:
+    *   Z-Scores were summed by Player, Team, and Acquisition Source to determine the "Effective Season Impact".
+
+
 ---
 
 #### TODO
 - [x] Initial analysis and data processing
-- [ ] Add visualizations (Bar charts for Draft vs FA split)
-- [ ] Deep dive into "Worst Drops" (players drafted, dropped, and then performed well elsewhere)
+- [x] Add visualizations (Bar charts for Draft vs FA split)
+- [x] Deep dive into "Worst Drops" (players drafted, dropped, and then performed well elsewhere)
 
 ---
 
