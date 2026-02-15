@@ -1,9 +1,9 @@
 ---
 layout: default
-title: 2026 Fantasy Baseball Keepers
+title: 13_2026 Fantasy Baseball Keepers
 description: Projected keepers for each team based on 2025 stats and 5x5 categories.
 permalink: /pages/fantasy_baseball_keepers_2026
-nav_order: 13
+nav_order: 2.14
 ---
 
 # 2026 Projected Keepers
