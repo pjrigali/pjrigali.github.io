@@ -32,7 +32,7 @@ Some content is polished, some is intentionally rough — the emphasis is useful
 
 ## AI-Augmented Development
 
-I use AI coding agents as a development accelerator — not to replace thinking, but to speed up execution. I provide the direction, domain expertise, and quality control while the AI handles boilerplate, debugging loops, and repetitive operations. Think of it as pair programming where I'm the architect and the AI is a fast, tireless junior developer.
+I use AI coding agents as a development accelerator to speed up execution. I provide the direction, domain expertise, and quality control while the AI handles boilerplate, debugging loops, and repetitive operations.
 
 **How I use it:**
 - **Data engineering** — ETL pipelines, API integrations, data lake organization
@@ -45,8 +45,6 @@ I use AI coding agents as a development accelerator — not to replace thinking,
 - A persistent environment configuration ensures every new AI session inherits my coding standards, file conventions, and project rules
 - Reusable workflows codify repetitive tasks so the AI follows consistent patterns across projects
 - I maintain a centralized data lake architecture that the AI operates within — it doesn't decide *where* data goes, I do
-
-The AI is a tool. The judgment is mine.
 
 ---
 
