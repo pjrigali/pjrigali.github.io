@@ -30,6 +30,26 @@ Some content is polished, some is intentionally rough — the emphasis is useful
 
 ---
 
+## AI-Augmented Development
+
+I use AI coding agents as a development accelerator — not to replace thinking, but to speed up execution. I provide the direction, domain expertise, and quality control while the AI handles boilerplate, debugging loops, and repetitive operations. Think of it as pair programming where I'm the architect and the AI is a fast, tireless junior developer.
+
+**How I use it:**
+- **Data engineering** — ETL pipelines, API integrations, data lake organization
+- **Web scraping** — Building and maintaining scrapers with structured output
+- **Analysis** — Exploratory data analysis, statistical modeling, report generation
+- **DevOps** — Repo management, CI/CD workflows, environment configuration
+- **Documentation** — Summarizing code and publishing write-ups to this site
+
+**What makes it work:**
+- A persistent environment configuration ensures every new AI session inherits my coding standards, file conventions, and project rules
+- Reusable workflows codify repetitive tasks so the AI follows consistent patterns across projects
+- I maintain a centralized data lake architecture that the AI operates within — it doesn't decide *where* data goes, I do
+
+The AI is a tool. The judgment is mine.
+
+---
+
 ## Contact / Links
 
 - LinkedIn: [https://www.linkedin.com/in/peterrigali/](https://www.linkedin.com/in/peterrigali/)
@@ -45,4 +65,4 @@ If something here helps you or sparks an idea, feel free to adapt it for your ow
 ---
 [Home](https://pjrigali.github.io)
 
-*Last Updated: 2026-01-27*
+*Last Updated: 2026-02-15*
