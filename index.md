@@ -17,6 +17,7 @@ A small repo for updates and thoughts. Mostly Python.
 #### [10_Kalshi Analysis](pages/10_Kalshi_Analysis.md)
 #### [11_Kalshi Price Impact](pages/11_Kalshi_Price_Impact.md)
 #### [12_Accenture Promotion Analysis](pages/12_Accenture_Promotion_Analysis.md)
+#### [13_Fantasy Baseball Keepers 2026](pages/13_Fantasy_Baseball_Keepers_2026.md)
 
 ### About
 [About](pages/01_About.md)
