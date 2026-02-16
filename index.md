@@ -19,6 +19,8 @@ A small repo for updates and thoughts. Mostly Python.
 #### [12_Accenture Promotion Analysis](pages/12_Accenture_Promotion_Analysis.md)
 #### [13_Fantasy Baseball Keepers 2026](pages/13_Fantasy_Baseball_Keepers_2026.md)
 #### [14_Fantasy Baseball Impact 2025](pages/14_Fantasy_Baseball_Impact_2025.md)
+#### [15_Fantasy Baseball Draft Strategy 2025](pages/15_Fantasy_Baseball_Draft_Strategy_2025.md)
+#### [16_Fantasy Baseball Draft Strategy 2026](pages/16_Fantasy_Baseball_Draft_Strategy_2026.md)
 
 ### About
 [About](pages/01_About.md)
