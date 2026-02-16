@@ -21,6 +21,7 @@ A small repo for updates and thoughts. Mostly Python.
 #### [14_Fantasy Baseball Impact 2025](pages/14_Fantasy_Baseball_Impact_2025.md)
 #### [15_Fantasy Baseball Draft Strategy 2025](pages/15_Fantasy_Baseball_Draft_Strategy_2025.md)
 #### [16_Fantasy Baseball Draft Strategy 2026](pages/16_Fantasy_Baseball_Draft_Strategy_2026.md)
+#### [17_Fantasy Baseball Dashboard](pages/17_Fantasy_Baseball_Dashboard.html)
 
 ### About
 [About](pages/01_About.md)
