@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "2025 Fantasy Baseball League Analysis"
+title: "18_2025 Fantasy Baseball League Analysis"
 description: An in-depth analysis of roster management styles across the entire league. Optimal evaluation windows, churn rates, and manager breakdown.
 permalink: /posts/Fantasy_Baseball_League_Analysis_2025
 nav_order: 2.18
