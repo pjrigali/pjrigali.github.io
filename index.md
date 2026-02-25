@@ -23,6 +23,7 @@ A small repo for updates and thoughts. Mostly Python.
 #### [16_Fantasy_Baseball_Dashboard](pages/16_Fantasy_Baseball_Dashboard.html)
 #### [17_Fantasy_Baseball_Roster_Audit_2025 (Team PJR)](pages/17_Fantasy_Baseball_Roster_Audit_2025.md)
 #### [18_Fantasy_Baseball_League_Analysis_2025](pages/18_Fantasy_Baseball_League_Analysis_2025.md)
+#### [19_AI_Economic_Shift_Index](pages/19_AI_Economic_Shift_Index.md)
 
 ### About
 [About](pages/01_About.md)
