@@ -26,6 +26,7 @@ A small repo for updates and thoughts. Mostly Python.
 #### [19_AI_Economic_Shift_Index](pages/19_AI_Economic_Shift_Index.md)
 #### [20_Fantasy_Baseball_Draft_Cheatsheet_2026](pages/20_Fantasy_Baseball_Draft_Cheatsheet_2026.md)
 #### [21_Fantasy_Baseball_League_Roster_Evaluation_2026](pages/21_Fantasy_Baseball_League_Roster_Evaluation_2026.md)
+#### [22_Fantasy_Baseball_Rookie_Valuation](pages/22_Fantasy_Baseball_Rookie_Valuation.md)
 
 ### About
 [About](pages/01_About.md)
