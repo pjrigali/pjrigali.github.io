@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Antigravity IDE — Interactive Demo</title>
+  <meta name="description" content="An interactive Google Gravity-style demonstration of the Antigravity IDE, showcasing AI-powered coding workflows.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="23_Antigravity_IDE_Demo.css">
+</head>
+<body>
+  <div class="vscode-shell">
+
+    <!-- ── Title Bar ─────────────────────────────────── -->
+    <div class="titlebar">
+      <div class="titlebar-left">
+        <svg class="antigravity-logo" width="16" height="16" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#4285F4"/><path d="M12 6l4 6h-8z" fill="#fff"/></svg>
+        <span class="titlebar-menu">File</span>
+        <span class="titlebar-menu">Edit</span>
+        <span class="titlebar-menu">Selection</span>
+        <span class="titlebar-menu">View</span>
+        <span class="titlebar-menu">Go</span>
+        <span class="titlebar-menu">Run</span>
+        <span class="titlebar-menu">Terminal</span>
+        <span class="titlebar-menu">Help</span>
+      </div>
+      <div class="titlebar-center">main — Antigravity</div>
+      <div class="titlebar-right">
+        <span class="win-btn">─</span>
+        <span class="win-btn">☐</span>
+        <span class="win-btn win-close">✕</span>
+      </div>
+    </div>
+
+    <!-- ── Main Layout ───────────────────────────────── -->
+    <div class="main-layout">
+
+      <!-- Activity Bar -->
+      <div class="activity-bar">
+        <div class="activity-icon active" title="Explorer">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/></svg>
+        </div>
+        <div class="activity-icon" title="Search">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        </div>
+        <div class="activity-icon" title="Source Control">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="18" r="3"/><path d="M12 9v3m-4.5 2.5L12 12l4.5 2.5"/></svg>
+        </div>
+        <div class="activity-icon" title="Extensions">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/></svg>
+        </div>
+        <div class="activity-icon activity-bottom" title="Settings" id="settingsBtn">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <div class="sidebar-title">EXPLORER</div>
+        <div class="sidebar-section">
+          <div class="section-header open">
+            <span class="chevron">▶</span> MAIN
+          </div>
+          <div class="section-body">
+            <!-- .agent — CLICKABLE -->
+            <div class="tree-item folder open clickable" data-detail="agent">
+              <span class="chevron">▶</span>
+              <span class="folder-icon">📁</span> .agent
+            </div>
+            <div class="tree-children">
+              <div class="tree-item file clickable" data-file="environment">
+                <span class="file-icon md-icon">📝</span> ENVIRONMENT.md
+              </div>
+              <div class="tree-item folder open">
+                <span class="chevron">▶</span>
+                <span class="folder-icon">📁</span> workflows
+              </div>
+              <div class="tree-children">
+                <div class="tree-item file clickable" data-file="generate-log">
+                  <span class="file-icon md-icon">📝</span> generate-log.md
+                </div>
+                <div class="tree-item file clickable" data-file="move-data">
+                  <span class="file-icon md-icon">📝</span> move-data-to-bronze.md
+                </div>
+                <div class="tree-item file clickable" data-file="publish">
+                  <span class="file-icon md-icon">📝</span> publish-to-website.md
+                </div>
+              </div>
+            </div>
+
+            <!-- .data_lake — CLICKABLE -->
+            <div class="tree-item folder open clickable" data-detail="data_lake">
+              <span class="chevron">▶</span>
+              <span class="folder-icon">📁</span> .data_lake
+            </div>
+            <div class="tree-children">
+              <div class="tree-item folder open">
+                <span class="chevron">▶</span>
+                <span class="folder-icon">📁</span> 00_Logs
+              </div>
+              <div class="tree-children">
+                <div class="tree-item folder open" data-toggle="folder">
+                  <span class="chevron">▶</span>
+                  <span class="folder-icon">📁</span> daily_summaries
+                </div>
+                <div class="tree-children">
+                  <div class="tree-item file clickable" data-file="log-2026-01-20"><span class="file-icon md-icon">📝</span> 2026-01-20.md</div>
+                  <div class="tree-item file clickable" data-file="log-2026-01-21"><span class="file-icon md-icon">📝</span> 2026-01-21.md</div>
+                  <div class="tree-item file clickable" data-file="log-2026-01-28"><span class="file-icon md-icon">📝</span> 2026-01-28.md</div>
+                  <div class="tree-item file clickable" data-file="log-2026-01-29"><span class="file-icon md-icon">📝</span> 2026-01-29.md</div>
+                  <div class="tree-item file clickable" data-file="log-2026-01-30"><span class="file-icon md-icon">📝</span> 2026-01-30.md</div>
+                  <div class="tree-item file clickable" data-file="log-2026-01-31"><span class="file-icon md-icon">📝</span> 2026-01-31.md</div>
+                  <div class="tree-item file clickable" data-file="log-2026-02-12"><span class="file-icon md-icon">📝</span> 2026-02-12.md</div>
+                  <div class="tree-item file clickable" data-file="log-2026-02-15"><span class="file-icon md-icon">📝</span> 2026-02-15.md</div>
+                  <div class="tree-item file clickable" data-file="log-2026-02-16"><span class="file-icon md-icon">📝</span> 2026-02-16.md</div>
+                  <div class="tree-item file clickable" data-file="log-2026-02-17"><span class="file-icon md-icon">📝</span> 2026-02-17.md</div>
+                  <div class="tree-item file clickable" data-file="log-2026-02-21"><span class="file-icon md-icon">📝</span> 2026-02-21.md</div>
+                  <div class="tree-item file clickable" data-file="log-2026-02-22"><span class="file-icon md-icon">📝</span> 2026-02-22.md</div>
+                  <div class="tree-item file clickable" data-file="log-2026-02-25"><span class="file-icon md-icon">📝</span> 2026-02-25.md</div>
+                  <div class="tree-item file clickable" data-file="log-2026-02-26"><span class="file-icon md-icon">📝</span> 2026-02-26.md</div>
+                  <div class="tree-item file clickable" data-file="log-2026-03-03"><span class="file-icon md-icon">📝</span> 2026-03-03.md</div>
+                  <div class="tree-item file clickable" data-file="log-2026-03-04"><span class="file-icon md-icon">📝</span> 2026-03-04.md</div>
+                  <div class="tree-item file clickable" data-file="log-2026-03-08"><span class="file-icon md-icon">📝</span> 2026-03-08.md</div>
+                  <div class="tree-item file clickable" data-file="log-2026-03-12"><span class="file-icon md-icon">📝</span> 2026-03-12.md</div>
+                  <div class="tree-item file clickable" data-file="log-2026-03-14"><span class="file-icon md-icon">📝</span> 2026-03-14.md</div>
+                  <div class="tree-item file clickable" data-file="log-2026-03-16"><span class="file-icon md-icon">📝</span> 2026-03-16.md</div>
+                  <div class="tree-item file clickable" data-file="log-2026-03-19"><span class="file-icon md-icon">📝</span> 2026-03-19.md</div>
+                  <div class="tree-item file clickable" data-file="log-2026-03-21"><span class="file-icon md-icon">📝</span> 2026-03-21.md</div>
+                  <div class="tree-item file clickable" data-file="log-2026-03-23"><span class="file-icon md-icon">📝</span> 2026-03-23.md</div>
+                  <div class="tree-item file clickable" data-file="log-2026-03-24"><span class="file-icon md-icon">📝</span> 2026-03-24.md</div>
+                </div>
+              </div>
+              <div class="tree-item folder collapsed-folder">
+                <span class="chevron">▶</span>
+                <span class="folder-icon">📁</span> 01_Bronze
+              </div>
+              <div class="tree-item folder collapsed-folder">
+                <span class="chevron">▶</span>
+                <span class="folder-icon">📁</span> 02_Silver
+              </div>
+              <div class="tree-item folder collapsed-folder">
+                <span class="chevron">▶</span>
+                <span class="folder-icon">📁</span> 03_Gold
+              </div>
+            </div>
+
+            <!-- Project folders — all clickable -->
+            <div class="tree-item folder clickable collapsed-folder" data-detail="acn_salary"><span class="chevron">▶</span><span class="folder-icon">📁</span> acn_salary</div>
+            <div class="tree-item folder clickable collapsed-folder" data-detail="chrome"><span class="chevron">▶</span><span class="folder-icon">📁</span> chrome</div>
+            <div class="tree-item folder clickable collapsed-folder" data-detail="cod"><span class="chevron">▶</span><span class="folder-icon">📁</span> cod</div>
+            <div class="tree-item folder clickable collapsed-folder" data-detail="consulting"><span class="chevron">▶</span><span class="folder-icon">📁</span> consulting</div>
+            <div class="tree-item folder clickable collapsed-folder" data-detail="csv_formatter"><span class="chevron">▶</span><span class="folder-icon">📁</span> csv-formatter</div>
+            <div class="tree-item folder clickable collapsed-folder" data-detail="fantasy_baseball"><span class="chevron">▶</span><span class="folder-icon">📁</span> fantasy_baseball</div>
+            <div class="tree-item folder clickable collapsed-folder" data-detail="fed_text"><span class="chevron">▶</span><span class="folder-icon">📁</span> fed_text</div>
+            <div class="tree-item folder clickable collapsed-folder" data-detail="fox_news"><span class="chevron">▶</span><span class="folder-icon">📁</span> fox_news</div>
+            <div class="tree-item folder clickable collapsed-folder" data-detail="gifts_n_go"><span class="chevron">▶</span><span class="folder-icon">📁</span> gifts_n_go</div>
+            <div class="tree-item folder clickable collapsed-folder" data-detail="gmail"><span class="chevron">▶</span><span class="folder-icon">📁</span> gmail</div>
+            <div class="tree-item folder clickable collapsed-folder" data-detail="grasshopper"><span class="chevron">▶</span><span class="folder-icon">📁</span> grasshopper</div>
+            <div class="tree-item folder clickable collapsed-folder" data-detail="health_fitness"><span class="chevron">▶</span><span class="folder-icon">📁</span> health_fitness</div>
+            <div class="tree-item folder clickable collapsed-folder" data-detail="house"><span class="chevron">▶</span><span class="folder-icon">📁</span> house</div>
+            <div class="tree-item folder clickable collapsed-folder" data-detail="kalshi"><span class="chevron">▶</span><span class="folder-icon">📁</span> kalshi</div>
+            <div class="tree-item folder clickable collapsed-folder" data-detail="old_trading"><span class="chevron">▶</span><span class="folder-icon">📁</span> old_trading</div>
+            <div class="tree-item folder clickable collapsed-folder" data-detail="personal_finance"><span class="chevron">▶</span><span class="folder-icon">📁</span> personal_finance</div>
+            <div class="tree-item folder clickable collapsed-folder" data-detail="photo"><span class="chevron">▶</span><span class="folder-icon">📁</span> photo</div>
+            <div class="tree-item folder clickable collapsed-folder" data-detail="poker"><span class="chevron">▶</span><span class="folder-icon">📁</span> poker</div>
+            <div class="tree-item folder clickable collapsed-folder" data-detail="presentation"><span class="chevron">▶</span><span class="folder-icon">📁</span> presentation</div>
+            <div class="tree-item folder clickable collapsed-folder" data-detail="pyjr"><span class="chevron">▶</span><span class="folder-icon">📁</span> pyjr</div>
+            <div class="tree-item folder clickable collapsed-folder" data-detail="sf"><span class="chevron">▶</span><span class="folder-icon">📁</span> sf</div>
+            <div class="tree-item folder clickable collapsed-folder" data-detail="strava"><span class="chevron">▶</span><span class="folder-icon">📁</span> strava</div>
+            <div class="tree-item folder clickable collapsed-folder" data-detail="tracking_ai"><span class="chevron">▶</span><span class="folder-icon">📁</span> tracking_ai</div>
+            <div class="tree-item folder clickable collapsed-folder" data-detail="utils"><span class="chevron">▶</span><span class="folder-icon">📁</span> utils</div>
+            <div class="tree-item folder clickable collapsed-folder" data-detail="voting"><span class="chevron">▶</span><span class="folder-icon">📁</span> voting</div>
+            <div class="tree-item folder clickable collapsed-folder" data-detail="website"><span class="chevron">▶</span><span class="folder-icon">📁</span> website</div>
+            <div class="tree-item folder clickable collapsed-folder" data-detail="white_house"><span class="chevron">▶</span><span class="folder-icon">📁</span> white_house</div>
+            <div class="tree-item folder clickable collapsed-folder" data-detail="whoop_data"><span class="chevron">▶</span><span class="folder-icon">📁</span> whoop_data</div>
+            <div class="tree-item folder clickable collapsed-folder" data-detail="xbox_controller"><span class="chevron">▶</span><span class="folder-icon">📁</span> xbox_controller</div>
+            <div class="tree-item file"><span class="file-icon">⚙️</span> config.ini</div>
+            <div class="tree-item file"><span class="file-icon" style="color:#e8ab53">📓</span> master.ipynb</div>
+            <div class="tree-item file clickable" data-file="prompt"><span class="file-icon md-icon">📝</span> PROMPT.md</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Editor Area -->
+      <div class="editor-area">
+        <div class="tab-bar" id="tabBar">
+          <!-- Tabs populated by JS -->
+        </div>
+        <div class="editor-content" id="editorContent">
+          <!-- Content populated by JS -->
+        </div>
+      </div>
+
+      <!-- Chat Panel -->
+      <div class="chat-panel">
+        <div class="chat-header">
+          <svg width="14" height="14" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#4285F4"/><path d="M12 6l4 6h-8z" fill="#fff"/></svg>
+          <span>Antigravity Chat</span>
+          <span class="chat-model-badge">Gemini 2.5 Pro</span>
+        </div>
+        <div class="chat-messages">
+          <div class="chat-msg assistant">
+            <div class="chat-avatar">🤖</div>
+            <div class="chat-bubble">
+              <p>Hello! I'm Antigravity, your AI coding assistant powered by Google DeepMind. I can help you with:</p>
+              <ul>
+                <li>Writing and debugging code</li>
+                <li>Running terminal commands</li>
+                <li>Searching the web for solutions</li>
+                <li>Managing files and workflows</li>
+              </ul>
+              <p>What would you like to work on?</p>
+            </div>
+          </div>
+          <div class="chat-msg user">
+            <div class="chat-bubble user-bubble">Can you run /generate-log for today?</div>
+          </div>
+          <div class="chat-msg assistant">
+            <div class="chat-avatar">🤖</div>
+            <div class="chat-bubble">
+              <p>I'll generate a daily log entry. Let me read the workflow and gather today's git activity…</p>
+              <div class="tool-call">
+                <span class="tool-icon">⚡</span> <code>view_file</code> — .agent/workflows/generate-log.md
+              </div>
+              <div class="tool-call">
+                <span class="tool-icon">⚡</span> <code>run_command</code> — git log --since="2026-03-13T00:00:00"
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="chat-input-area">
+          <input type="text" class="chat-input" placeholder="Ask Antigravity…" disabled>
+          <div class="chat-input-toolbar">
+            <span class="toolbar-btn" title="Attach">＋</span>
+            <span class="toolbar-btn" id="fastModeBtn" title="Fast Mode">⚡ Fast</span>
+            <span class="toolbar-divider"></span>
+            <span class="model-selector" id="modelSelector" title="Select Model">
+              <span class="model-selector-chevron">⌃</span>
+              <span class="model-selector-name" id="modelSelectorName">Claude Opus 4.6 (Thinking)</span>
+            </span>
+            <span class="toolbar-spacer"></span>
+            <span class="toolbar-btn mic-btn" title="Voice">🎙</span>
+            <button class="chat-send" disabled>→</button>
+          </div>
+          <!-- Conversation Mode Dropdown -->
+          <div class="mode-dropdown" id="modeDropdown">
+            <div class="mode-dropdown-header">Conversation mode</div>
+            <div class="mode-option" id="modePlanning">
+              <div class="mode-title">Planning</div>
+              <div class="mode-desc">Agent can plan before executing tasks. Use for deep research, complex tasks, or collaborative work</div>
+            </div>
+            <div class="mode-option selected" id="modeFast">
+              <div class="mode-title">Fast</div>
+              <div class="mode-desc">Agent will execute tasks directly. Use for simple tasks that can be completed faster</div>
+            </div>
+          </div>
+          <!-- Model Dropdown -->
+          <div class="model-dropdown" id="modelDropdown">
+            <div class="model-dropdown-header">Model</div>
+            <div class="model-option" data-model="Gemini 3.1 Pro (High)">Gemini 3.1 Pro (High) <span class="model-badge">New</span></div>
+            <div class="model-option" data-model="Gemini 3.1 Pro (Low)">Gemini 3.1 Pro (Low) <span class="model-badge">New</span></div>
+            <div class="model-option" data-model="Gemini 3 Flash">Gemini 3 Flash</div>
+            <div class="model-option" data-model="Claude Sonnet 4.6 (Thinking)">Claude Sonnet 4.6 (Thinking)</div>
+            <div class="model-option selected" data-model="Claude Opus 4.6 (Thinking)">Claude Opus 4.6 (Thinking)</div>
+            <div class="model-option" data-model="GPT-OSS 120B (Medium)">GPT-OSS 120B (Medium)</div>
+            <div class="model-option quota-exhausted-option" data-model="Quota Exhausted">Quota Exhausted</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Quota Notification ────────────────────────── -->
+    <div class="quota-notification" id="quotaNotification">
+      <div class="quota-header">
+        <span class="quota-icon">ⓧ</span>
+        <span>Baseline model quota reached</span>
+      </div>
+      <div class="quota-body">
+        Your plan's baseline quota will refresh on 3/30/2026, 7:55:32 PM. You can upgrade to the Google AI Ultra plan to receive the highest rate limits. <span class="syn-link">See plans.</span>
+      </div>
+      <div class="quota-footer">
+        <button class="quota-btn dismiss-btn" id="quotaDismissBtn">Dismiss</button>
+        <div class="quota-footer-right">
+          <button class="quota-btn secondary-btn">See Plans</button>
+          <button class="quota-btn primary-btn">Enable Overages</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Status Bar ────────────────────────────────── -->
+    <div class="statusbar">
+      <div class="statusbar-left">
+        <span class="sb-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M12 9v6l-6 3"/></svg> main</span>
+        <span class="sb-item">0 errors</span>
+        <span class="sb-item">0 warnings</span>
+      </div>
+      <div class="statusbar-right">
+        <span class="sb-item">Ln 1, Col 1</span>
+        <span class="sb-item">UTF-8</span>
+        <span class="sb-item">Markdown</span>
+        <span class="sb-item antigravity-status">🟢 Antigravity Connected</span>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- ── Detail Modal ──────────────────────────────────── -->
+  <div class="detail-overlay" id="detailOverlay">
+    <div class="detail-modal">
+      <div class="detail-modal-header">
+        <h2 id="modalTitle"></h2>
+        <button class="detail-modal-close" id="modalCloseBtn">✕</button>
+      </div>
+      <div class="detail-modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <!-- ── Settings Overlay ────────────────────────────────── -->
+  <div class="settings-overlay" id="settingsOverlay">
+    <div class="settings-window">
+      <!-- Settings Title Bar -->
+      <div class="settings-titlebar">
+        <span class="settings-titlebar-text">Settings - Models</span>
+        <div class="settings-titlebar-controls">
+          <span class="settings-win-btn">─</span>
+          <span class="settings-win-btn">□</span>
+          <span class="settings-win-btn settings-win-close" id="settingsCloseBtn">✕</span>
+        </div>
+      </div>
+      <div class="settings-body">
+        <!-- Settings Sidebar -->
+        <div class="settings-sidebar">
+          <div class="settings-nav-item">Agent</div>
+          <div class="settings-nav-item">Browser</div>
+          <div class="settings-nav-item">Notifications</div>
+          <div class="settings-nav-item active">Models</div>
+          <div class="settings-nav-item">Customizations</div>
+          <div class="settings-nav-item">Tab</div>
+          <div class="settings-nav-item">Editor</div>
+          <div class="settings-nav-spacer"></div>
+          <div class="settings-nav-section">Account</div>
+        </div>
+        <!-- Settings Content -->
+        <div class="settings-content">
+          <div class="settings-content-header">
+            <div></div>
+            <button class="settings-refresh-btn">Refresh</button>
+          </div>
+
+          <!-- Model Credits Section -->
+          <div class="settings-section-label">MODEL CREDITS</div>
+          <div class="settings-card">
+            <div class="settings-toggle-row">
+              <div class="settings-toggle-info">
+                <div class="settings-toggle-title">Enable AI Credit Overages</div>
+                <div class="settings-toggle-desc">When toggled on, Antigravity will use your AI credits to fulfill model requests once you're out of model quota. Antigravity will always use your model quota first before using AI credits.</div>
+              </div>
+              <div class="settings-toggle">
+                <div class="settings-toggle-track">
+                  <div class="settings-toggle-thumb"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Model Quota Section -->
+          <div class="settings-section-label">MODEL QUOTA</div>
+          <div class="settings-card settings-quota-card">
+            <!-- Gemini 3.1 Pro (High) -->
+            <div class="quota-row">
+              <div class="quota-header">
+                <span class="quota-model-name">Gemini 3.1 Pro (High)</span>
+                <span class="quota-refresh">Refreshes in 2 hours, 28 minutes</span>
+              </div>
+              <div class="quota-bars">
+                <div class="quota-bar used"></div>
+                <div class="quota-bar used"></div>
+                <div class="quota-bar used"></div>
+                <div class="quota-bar"></div>
+                <div class="quota-bar"></div>
+              </div>
+            </div>
+
+            <!-- Gemini 3.1 Pro (Low) -->
+            <div class="quota-row">
+              <div class="quota-header">
+                <span class="quota-model-name">Gemini 3.1 Pro (Low)</span>
+                <span class="quota-refresh">Refreshes in 2 hours, 28 minutes</span>
+              </div>
+              <div class="quota-bars">
+                <div class="quota-bar used"></div>
+                <div class="quota-bar used"></div>
+                <div class="quota-bar used"></div>
+                <div class="quota-bar used"></div>
+                <div class="quota-bar"></div>
+              </div>
+            </div>
+
+            <!-- Gemini 3 Flash -->
+            <div class="quota-row">
+              <div class="quota-header">
+                <span class="quota-model-name">Gemini 3 Flash</span>
+                <span class="quota-refresh">Refreshes in 4 hours, 11 minutes</span>
+              </div>
+              <div class="quota-bars">
+                <div class="quota-bar used"></div>
+                <div class="quota-bar used"></div>
+                <div class="quota-bar used"></div>
+                <div class="quota-bar used"></div>
+                <div class="quota-bar used"></div>
+              </div>
+            </div>
+
+            <!-- Claude Sonnet 4.6 (Thinking) -->
+            <div class="quota-row">
+              <div class="quota-header">
+                <span class="quota-model-name">Claude Sonnet 4.6 (Thinking)</span>
+                <span class="quota-refresh">Refreshes in 4 hours, 6 minutes</span>
+              </div>
+              <div class="quota-bars">
+                <div class="quota-bar used"></div>
+                <div class="quota-bar used"></div>
+                <div class="quota-bar"></div>
+                <div class="quota-bar"></div>
+                <div class="quota-bar"></div>
+              </div>
+            </div>
+
+            <!-- Claude Opus 4.6 (Thinking) -->
+            <div class="quota-row">
+              <div class="quota-header">
+                <span class="quota-model-name">Claude Opus 4.6 (Thinking)</span>
+                <span class="quota-refresh">Refreshes in 4 hours, 6 minutes</span>
+              </div>
+              <div class="quota-bars">
+                <div class="quota-bar used"></div>
+                <div class="quota-bar used"></div>
+                <div class="quota-bar"></div>
+                <div class="quota-bar"></div>
+                <div class="quota-bar"></div>
+              </div>
+            </div>
+
+            <!-- GPT-OSS 120B (Medium) -->
+            <div class="quota-row">
+              <div class="quota-header">
+                <span class="quota-model-name">GPT-OSS 120B (Medium)</span>
+                <span class="quota-refresh">Refreshes in 4 hours, 6 minutes</span>
+              </div>
+              <div class="quota-bars">
+                <div class="quota-bar used"></div>
+                <div class="quota-bar used"></div>
+                <div class="quota-bar used"></div>
+                <div class="quota-bar"></div>
+                <div class="quota-bar"></div>
+              </div>
+            </div>
+          </div>
+
+          <p class="settings-footer-text">View your available model quota and AI credits. Model quota refreshes periodically based on your plan. Enable AI Credit Overages to continue using models when your quota is exhausted.</p>
+        </div>
+      </div>
+      <div class="settings-bottom-bar">
+        <span class="settings-feedback-link">Provide Feedback</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="23_Antigravity_IDE_Demo.js"></script>
+</body>
+</html>

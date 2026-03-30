@@ -27,6 +27,7 @@ A small repo for updates and thoughts. Mostly Python.
 #### [20_Fantasy_Baseball_Draft_Cheatsheet_2026](pages/20_Fantasy_Baseball_Draft_Cheatsheet_2026.md)
 #### [21_Fantasy_Baseball_League_Roster_Evaluation_2026](pages/21_Fantasy_Baseball_League_Roster_Evaluation_2026.md)
 #### [22_Fantasy_Baseball_Rookie_Valuation](pages/22_Fantasy_Baseball_Rookie_Valuation.md)
+#### [23_Antigravity_IDE_Demo](pages/23_Antigravity_IDE_Demo.html)
 
 ### About
 [About](pages/01_About.md)
