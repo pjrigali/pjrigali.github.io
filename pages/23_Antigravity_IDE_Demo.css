@@ -90,7 +90,7 @@ html, body {
 .tree-children { padding-left: 14px; }
 .tree-children.collapsed { display: none; }
 .collapsed-folder + .tree-children { display: none; }
-.folder-icon { font-size: 14px; }
+.folder-icon { width: 14px; height: 14px; flex-shrink: 0; margin-top: 1px; }
 .file-icon { font-size: 13px; width: 16px; text-align: center; }
 .md-icon { color: #519aba; }
 
@@ -140,7 +140,7 @@ html, body {
   flex: 1; overflow: auto; padding: 0;
   font-family: 'JetBrains Mono', 'Consolas', monospace;
   font-size: 13px; line-height: 1.6;
-  background: #1e1e1e;
+  background: #2b2d30;
 }
 .code-view { display: flex; min-height: 100%; }
 .line-numbers {
@@ -148,7 +148,7 @@ html, body {
   color: #5a5a5a; user-select: none; min-width: 48px;
   font-size: 13px; line-height: 1.6;
   font-family: 'JetBrains Mono', 'Consolas', monospace;
-  background: #1e1e1e;
+  background: #2b2d30;
 }
 .code-body {
   flex: 1; padding: 12px 16px; white-space: pre-wrap;
@@ -168,6 +168,65 @@ html, body {
 .syn-frontmatter { color: #808080; }
 .syn-table { color: #b5cea8; }
 .syn-link { color: #4fc1ff; text-decoration: underline; }
+
+/* ── Document View ────────────────────────────────────────── */
+.document-view {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  background: #2b2d30;
+  min-height: 100%;
+  box-sizing: border-box;
+}
+.document-page {
+  background: #fdfbf7;
+  color: #2b213a;
+  width: 100%;
+  padding: 40px 60px;
+  border-radius: 4px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(0,0,0,0.1);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  box-sizing: border-box;
+}
+.document-page .syn-heading { 
+  color: #43166b; font-weight: 800; font-size: 1.4em; 
+  display: block; margin-top: 14px; margin-bottom: 4px;
+  border-bottom: 1px solid #e1d5eb; padding-bottom: 4px;
+}
+.document-page .syn-bold { color: #5a2c8a; font-weight: 700; }
+.document-page .syn-code { 
+  color: #6d429e; background: rgba(109, 66, 158, 0.1); 
+  padding: 2px 6px; border-radius: 4px; font-weight: 500;
+  font-family: 'JetBrains Mono', monospace; font-size: 12.5px;
+}
+.document-page .syn-table { color: #333333; }
+.document-page .syn-link { color: #1e6bc0; }
+.document-page .syn-bullet { color: #333333; font-weight: bold; }
+.document-page .syn-comment { color: #555555; font-style: italic; }
+
+.document-page .git-plus { color: #2ea043; font-weight: bold; font-family: 'JetBrains Mono', monospace; }
+.document-page .git-minus { color: #f85149; font-weight: bold; font-family: 'JetBrains Mono', monospace; }
+
+.document-page .doc-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 15px 0;
+}
+.document-page .doc-table th,
+.document-page .doc-table td {
+  border: 1px solid #dccadc;
+  padding: 8px 12px;
+  text-align: left;
+}
+.document-page .doc-table th {
+  color: #5a2c8a;
+  background-color: #f6ebff; /* Optional faint header background for contrast */
+}
+
 
 /* ── Chat Panel ───────────────────────────────────────── */
 .chat-panel {
