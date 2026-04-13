@@ -12,7 +12,7 @@ A small repo for updates and thoughts. Mostly Python.
 ### Fantasy Baseball
 - [13_Fantasy Baseball Keepers 2026](/fantasy-baseball/keepers-2026)
 - [14_Fantasy Baseball Impact 2025](/fantasy-baseball/impact-2025)
-- [15_Fantasy Baseball Draft Strategy 2026](/fantasy-baseball/draft-strategy-2026)
+<!-- - [15_Fantasy Baseball Draft Strategy 2026](/fantasy-baseball/draft-strategy-2026) -->
 - [16_Fantasy Baseball Dashboard](pages/fantasy-baseball/16_Fantasy_Baseball_Dashboard.html)
 - [17_Fantasy Baseball Roster Audit 2025](/fantasy-baseball/roster-audit-2025)
 - [18_Fantasy Baseball League Analysis 2025](/fantasy-baseball/league-analysis-2025)
@@ -31,9 +31,9 @@ A small repo for updates and thoughts. Mostly Python.
 - [07_Face Detection](/photo/face-detection)
 
 ### Posts
-- [01_From the void](/posts/from-the-void)
+<!-- - [01_From the void](/posts/from-the-void)
 - [03_2026 Predictions](/posts/2026-predictions)
-- [04_Salesforce Dedup](/posts/salesforce-dedup)
+- [04_Salesforce Dedup](/posts/salesforce-dedup) -->
 - [08_WhiteHouseScraper](/posts/whitehouse-scraper)
 - [09_The Death of Pandas](/posts/death-of-pandas)
 - [12_Accenture Promotion Analysis](/posts/accenture-promotion-analysis)
