@@ -1,9 +1,10 @@
 ---
 title: 06_Making my Camera worse
 description: Mimic disposable camera settings using Python.
-permalink: /posts/06_Disposible_Camera
+permalink: /photo/disposable-camera
 layout: default
-nav_order: 2.06
+parent: Photo
+nav_order: 2
 ---
 
 # Disposable Camera Effect: Under the Hood

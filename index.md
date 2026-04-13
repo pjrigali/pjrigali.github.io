@@ -7,27 +7,38 @@ nav_order: 1
 # San Francisco Hates Left Turns
 A small repo for updates and thoughts. Mostly Python.
 
+---
+
+### Fantasy Baseball
+- [13_Fantasy Baseball Keepers 2026](/fantasy-baseball/keepers-2026)
+- [14_Fantasy Baseball Impact 2025](/fantasy-baseball/impact-2025)
+- [15_Fantasy Baseball Draft Strategy 2026](/fantasy-baseball/draft-strategy-2026)
+- [16_Fantasy Baseball Dashboard](pages/fantasy-baseball/16_Fantasy_Baseball_Dashboard.html)
+- [17_Fantasy Baseball Roster Audit 2025](/fantasy-baseball/roster-audit-2025)
+- [18_Fantasy Baseball League Analysis 2025](/fantasy-baseball/league-analysis-2025)
+- [20_Fantasy Baseball Draft Cheatsheet 2026](/fantasy-baseball/draft-cheatsheet-2026)
+- [21_Fantasy Baseball League Roster Evaluation 2026](/fantasy-baseball/roster-evaluation-2026)
+- [22_Fantasy Baseball Rookie Valuation](/fantasy-baseball/rookie-valuation)
+
+### Kalshi & Markets
+- [05_Kalshi Jerome Powell Speech Prediction](/kalshi/fed-speech-prediction)
+- [10_Kalshi Fed Mention Analysis](/kalshi/fed-mention-analysis)
+- [11_Kalshi Price Impact](/kalshi/price-impact)
+
+### Photo
+- [02_Photo Object Detection](/photo/photo-object-detection)
+- [06_Disposable Camera Effect](/photo/disposable-camera)
+- [07_Face Detection](/photo/face-detection)
+
 ### Posts
-#### [02_Photo Object Detection](pages/02_PhotoObjectDetection.md)
-#### [05_Kalshi Jerome Powell Speech Prediction](pages/05_Kalshi_FED.md)
-#### [06_Disposable Camera Effect](pages/06_DisposableCamera.md)
-#### [07_Face Detection](pages/07_FaceDetection.md)
-#### [08_WhiteHouseScraper](pages/08_WhiteHouseScraper.md)
-#### [09_The Death of Pandas](pages/09_Pandas.md)
-#### [10_Kalshi Analysis](pages/10_Kalshi_Analysis.md)
-#### [11_Kalshi Price Impact](pages/11_Kalshi_Price_Impact.md)
-#### [12_Accenture Promotion Analysis](pages/12_Accenture_Promotion_Analysis.md)
-#### [13_Fantasy Baseball Keepers 2026](pages/13_Fantasy_Baseball_Keepers_2026.md)
-#### [14_Fantasy Baseball Impact 2025](pages/14_Fantasy_Baseball_Impact_2025.md)
-<!-- #### [15_Fantasy_Baseball_Draft_Strategy_2026](pages/15_Fantasy_Baseball_Draft_Strategy_2026.md) -->
-#### [16_Fantasy_Baseball_Dashboard](pages/16_Fantasy_Baseball_Dashboard.html)
-#### [17_Fantasy_Baseball_Roster_Audit_2025 (Team PJR)](pages/17_Fantasy_Baseball_Roster_Audit_2025.md)
-#### [18_Fantasy_Baseball_League_Analysis_2025](pages/18_Fantasy_Baseball_League_Analysis_2025.md)
-#### [19_AI_Economic_Shift_Index](pages/19_AI_Economic_Shift_Index.md)
-#### [20_Fantasy_Baseball_Draft_Cheatsheet_2026](pages/20_Fantasy_Baseball_Draft_Cheatsheet_2026.md)
-#### [21_Fantasy_Baseball_League_Roster_Evaluation_2026](pages/21_Fantasy_Baseball_League_Roster_Evaluation_2026.md)
-#### [22_Fantasy_Baseball_Rookie_Valuation](pages/22_Fantasy_Baseball_Rookie_Valuation.md)
-#### [23_Antigravity_IDE_Demo](pages/23_Antigravity_IDE_Demo.html)
+- [01_From the void](/posts/from-the-void)
+- [03_2026 Predictions](/posts/2026-predictions)
+- [04_Salesforce Dedup](/posts/salesforce-dedup)
+- [08_WhiteHouseScraper](/posts/whitehouse-scraper)
+- [09_The Death of Pandas](/posts/death-of-pandas)
+- [12_Accenture Promotion Analysis](/posts/accenture-promotion-analysis)
+- [19_AI Economic Shift Index](/posts/ai-economic-shift-index)
+- [23_Antigravity IDE Demo](pages/23_Antigravity_IDE_Demo.html)
 
 ### About
-[About](pages/01_About.md)
+[About](/about/)

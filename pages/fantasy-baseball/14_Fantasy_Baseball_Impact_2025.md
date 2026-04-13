@@ -2,8 +2,9 @@
 layout: default
 title: "14_2025 Fantasy Baseball Impact Analysis"
 description: An in-depth analysis of the 2025 Fantasy Baseball season, focusing on the impact of the Draft vs. Free Agency.
-permalink: /posts/2025_Fantasy_Impact
-nav_order: 2.15
+permalink: /fantasy-baseball/impact-2025
+parent: Fantasy Baseball
+nav_order: 2
 ---
 
 ## Project Overview

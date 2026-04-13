@@ -2,8 +2,8 @@
 layout: default
 title: "09_The Death of Pandas"
 description: Why using Pandas in production is a sign of weakness.
-permalink: /posts/DeathOfPandas
-nav_order: 2.10
+permalink: /posts/death-of-pandas
+nav_order: 10
 ---
 
 # The Death of Pandas: A Crutch for the Inexperienced

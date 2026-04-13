@@ -2,8 +2,9 @@
 layout: default
 title: "10_Kalshi Fed Mention Analysis"
 description: In-depth analysis of KXFEDMENTION word performance and availability edge.
-permalink: /posts/Kalshi_Fed_Analysis
-nav_order: 2.11
+permalink: /kalshi/fed-mention-analysis
+parent: Kalshi & Markets
+nav_order: 2
 ---
 
 ## Project Overview

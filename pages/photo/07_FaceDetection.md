@@ -1,9 +1,10 @@
 ---
 title: 07_Face Detection with OpenCV YuNet
 description: Real-time face detection using the YuNet model.
-permalink: /posts/07_Face_Detection
+permalink: /photo/face-detection
 layout: default
-nav_order: 2.07
+parent: Photo
+nav_order: 3
 ---
 
 # 07_Face Detection with OpenCV YuNet

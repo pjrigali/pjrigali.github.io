@@ -2,8 +2,9 @@
 layout: default
 title: "21_Fantasy Baseball League Roster Evaluation 2026"
 description: Projected strength analysis based on drafted rosters and 2026 projections.
-permalink: /posts/Fantasy_Baseball_League_Roster_Evaluation_2026
-nav_order: 2.21
+permalink: /fantasy-baseball/roster-evaluation-2026
+parent: Fantasy Baseball
+nav_order: 8
 ---
 
 # ⚾ 2026 League Roster Evaluation

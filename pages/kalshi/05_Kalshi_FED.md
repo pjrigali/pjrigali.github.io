@@ -1,9 +1,10 @@
 ---
 title: 05_Kalshi Jerome Powell Speech Prediction
 description: A test run for predicting Powell verbiage.
-permalink: /posts/05_Kalshi_Fed
+permalink: /kalshi/fed-speech-prediction
 layout: default
-nav_order: 2.05
+parent: Kalshi & Markets
+nav_order: 1
 ---
 # Prediction Markets: Probability of Jerome Powell using Kalshi words in FOMC speech.
 

@@ -2,8 +2,9 @@
 layout: default
 title: "22_Fantasy Baseball Rookie Valuation"
 description: Examining if drafting MLB rookies brings category value to H2H Fantasy leagues.
-permalink: /posts/Fantasy_Baseball_Rookie_Valuation
-nav_order: 2.22
+permalink: /fantasy-baseball/rookie-valuation
+parent: Fantasy Baseball
+nav_order: 9
 ---
 
 ## Project Overview

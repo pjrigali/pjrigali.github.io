@@ -2,8 +2,9 @@
 layout: default
 title: "20_Fantasy Baseball Draft Cheatsheet 2026"
 description: PJR's 2026 Draft Cheat Sheet with player targets by round and Z-Score rankings.
-permalink: /posts/Fantasy_Baseball_Draft_Cheatsheet_2026
-nav_order: 2.20
+permalink: /fantasy-baseball/draft-cheatsheet-2026
+parent: Fantasy Baseball
+nav_order: 7
 ---
 
 # 🏆 PJR 2026 Draft Cheat Sheet

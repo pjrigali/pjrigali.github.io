@@ -2,8 +2,9 @@
 layout: default
 title: 13_2026 Fantasy Baseball Keepers
 description: Projected keepers for each team based on blended 2025 stats, 2026 projections, and ADP surplus value.
-permalink: /pages/fantasy_baseball_keepers_2026
-nav_order: 2.14
+permalink: /fantasy-baseball/keepers-2026
+parent: Fantasy Baseball
+nav_order: 1
 ---
 
 # 2026 Projected Keepers

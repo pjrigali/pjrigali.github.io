@@ -1,9 +1,9 @@
 ---
 title: 08_WhiteHouseScraper
 description: A deep dive into the White House News Scraper logic and design.
-permalink: /posts/WhiteHouseScraper
+permalink: /posts/whitehouse-scraper
 layout: default
-nav_order: 2.09
+nav_order: 9
 ---
 
 # White House News Scraper

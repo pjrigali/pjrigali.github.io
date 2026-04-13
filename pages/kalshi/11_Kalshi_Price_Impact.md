@@ -2,8 +2,9 @@
 layout: default
 title: "11_Kalshi Price Impact"
 description: Advanced analysis of how median daily prices predict Yes/No outcomes in Fed Mention markets.
-permalink: /pages/11_Kalshi_Price_Impact
-nav_order: 2.12
+permalink: /kalshi/price-impact
+parent: Kalshi & Markets
+nav_order: 3
 ---
 
 ## Kalshi Price Impact Analysis
