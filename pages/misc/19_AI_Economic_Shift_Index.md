@@ -3,7 +3,8 @@ layout: default
 title: "19_AI_Economic_Shift_Index"
 description: A comprehensive analysis of the AI Economic Shift Index (AESI), summarizing the structural reallocation of capital, labor displacement, and macro real estate ripples driven by Artificial Intelligence.
 permalink: /posts/ai-economic-shift-index
-nav_order: 12
+nav_order: 4
+parent: Misc
 ---
 
 ## The AI Economic Shift Index (AESI)

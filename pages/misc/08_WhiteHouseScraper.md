@@ -3,7 +3,8 @@ title: 08_WhiteHouseScraper
 description: A deep dive into the White House News Scraper logic and design.
 permalink: /posts/whitehouse-scraper
 layout: default
-nav_order: 9
+nav_order: 1
+parent: Misc
 ---
 
 # White House News Scraper
@@ -134,4 +135,3 @@ The scraper's architecture prioritizes **minimizing network overhead** by perfor
 [Home](https://pjrigali.github.io)
 
 *Last Updated: 2026-01-27*
-
