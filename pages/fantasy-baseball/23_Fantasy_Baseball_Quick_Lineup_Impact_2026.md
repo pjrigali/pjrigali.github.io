@@ -21,15 +21,17 @@ nav_order: 10
 
 | Source value | Attribution | Explanation |
 |---|---|---|
-| `CPU` | **Quick Lineup** | User pressed the Quick Lineup button — all moves fire at the same millisecond |
+| `CPU` | **Quick Lineup** | ESPN's CPU executed a batch lineup set |
+| `CPU_USER_INITIATED` | **Quick Lineup** | User pressed the Quick Lineup button — ESPN's CPU executed the batch at the same timestamp |
 | `NightlyLeagueUpdateTaskProcessor` | **Quick Lineup** | ESPN's nightly automated lineup backend |
-| `CPU_USER_INITIATED` | **Manual** | User manually applied their own lineup changes |
 | `{GUID}` strings | **Manual** | Device-session individual drag-and-drop moves |
 | No recorded move | **Default/carried-over** | Player has been on bench since a prior move or was acquired directly onto bench |
 
+`CPU_USER_INITIATED` fires as a multi-player batch at a single timestamp (avg 7.4 moves/timestamp), structurally identical to `CPU` (6.97 moves/timestamp). Both represent Quick Lineup execution. GUID sessions average 1–2 moves per timestamp — individual drag-and-drop actions.
+
 **Missed stats** = counting stats (R, HR, RBI, SB) produced by that bench player on the day they were benched. A bench player who had no game that day contributes zero regardless of attribution.
 
-**Avg missed / day** = season total missed divided by the number of days in that classification (QL days for QL-placed, manual days for manually-placed). This represents the average daily cost of each placement type.
+**Avg missed / day** = season total missed divided by the number of days in that classification (QL days for QL-placed, manual days for manually-placed).
 
 **Pitching scope:** QS and SVHD are measured from active pitcher slots (SP, RP, P) and compared across Quick Lineup vs Manual *days* (day-level classification). Bench pitcher slot data is only available from April 28 onward due to an ESPN API limitation.
 
@@ -41,10 +43,10 @@ nav_order: 10
 
 | Team | QL Days | % QL | QL-Placed Missed | Manual-Placed Missed |
 |---|---|---|---|---|
-| Big Dumpers | 20/36 | 55.6% | **58** | 14 |
-| Datalickmyballs | 20/36 | 55.6% | **35** | 26 |
-| Big Papi | 19/36 | 52.8% | 24 | **42** |
-| Midnight Muncy's | 20/36 | 55.6% | 6 | **1** |
+| Datalickmyballs | 30/36 | 83.3% | **61** | 0 |
+| Big Dumpers | 28/36 | 77.8% | **72** | 0 |
+| Big Papi | 25/36 | 69.4% | **39** | 27 |
+| Midnight Muncy's | 22/36 | 61.1% | **6** | 1 |
 | All Rise | 16/36 | 44.4% | 6 | **57** |
 | Skubal Snacks | 11/36 | 30.6% | 4 | **31** |
 | This Schlitt is Bazzanas | 9/36 | 25.0% | 1 | **15** |
@@ -54,25 +56,25 @@ nav_order: 10
 
 *Missed = R + HR + RBI + SB produced by bench/IL batters who had a game. Bold = larger of the two for that team.*
 
-**Key finding:** For 8 of 10 teams, **manual bench placement decisions cost more production than Quick Lineup does**. Big Dumpers is the clear exception — QL is systematically benching their best hitters. Midnight Muncy's is essentially lossless on both sides: just 7 total missed counting stats all season across 36 days.
+**Key finding:** The answer depends on how often you use Quick Lineup. The three heaviest QL users — Big Dumpers (77.8%), Datalickmyballs (83.3%), and Big Papi (69.4%) — all show QL-placed bench misses exceeding manual. For the other 7 teams, **manual bench placement decisions cost more production than Quick Lineup**. Midnight Muncy's is the benchmark: just 7 total missed counting stats all season across both placement types combined.
 
 ### Pitching: QS and SVHD Production (Active Slots, through Apr 30)
 
-QS and SVHD come from active pitcher slots (SP, RP, P) only, compared across Quick Lineup vs Manual *days* (day-level classification). League-wide, manual days outperform Quick Lineup days on both pitching stats.
+QS and SVHD come from active pitcher slots (SP, RP, P) only, compared across Quick Lineup vs Manual *days*. League-wide, QL days hold a slight edge on QS; manual days outperform on SVHD.
 
 | Team | QL QS/day | Man QS/day | QS Gap | QL SVHD/day | Man SVHD/day | SVHD Gap |
 |---|---|---|---|---|---|---|
-| This Schlitt is Bazzanas | 0.222 | 0.750 | Manual +0.528 | 0.444 | 0.625 | Manual +0.181 |
-| Big Papi | 0.211 | 0.412 | Manual +0.201 | 0.421 | 0.765 | Manual +0.344 |
-| Big Dumpers | 0.350 | 0.625 | Manual +0.275 | 0.300 | 0.500 | Manual +0.200 |
-| Midnight Muncy's | 0.350 | 0.562 | Manual +0.213 | 0.750 | 0.750 | Tied |
+| This Schlitt is Bazzanas | 0.222 | 0.704 | Manual +0.482 | 0.444 | 0.667 | Manual +0.223 |
+| Big Dumpers | 0.407 | 0.667 | Manual +0.260 | 0.370 | 0.444 | Manual +0.074 |
+| Datalickmyballs | 0.552 | 0.714 | Manual +0.162 | 0.724 | 1.000 | Manual +0.276 |
+| Midnight Muncy's | 0.381 | 0.533 | Manual +0.152 | 0.714 | 0.800 | Manual +0.086 |
+| Big Papi | 0.292 | 0.333 | Manual +0.041 | 0.500 | 0.750 | Manual +0.250 |
 | Skubal Snacks | 0.545 | 0.400 | QL +0.145 | 0.545 | 0.680 | Manual +0.135 |
-| Datalickmyballs | 0.650 | 0.500 | QL +0.150 | 0.750 | 0.812 | Manual +0.062 |
 | Dingers Only | 0.500 | 0.333 | QL +0.167 | 0.833 | 0.633 | QL +0.200 |
 | All Rise | 0.562 | 0.250 | QL +0.312 | 0.375 | 0.350 | QL +0.025 |
 | Shohei Me the Money* | 1.000 | 0.353 | — | 1.000 | 0.647 | — |
-| Welcome to the JUNGle* | 0.000 | 0.312 | — | 2.000 | 0.594 | — |
-| **League avg** | **0.427** | **0.436** | **Manual +0.009** | **0.556** | **0.640** | **Manual +0.084** |
+| Welcome to the JUNGle* | 0.000 | 0.371 | — | 2.000 | 0.629 | — |
+| **League avg** | **0.438** | **0.430** | **QL +0.008** | **0.568** | **0.640** | **Manual +0.072** |
 
 *\* Shohei Me the Money (2 QL days) and Welcome to the JUNGle (1 QL day) have too few Quick Lineup days for meaningful rate comparison.*
 
@@ -119,10 +121,10 @@ Quick Lineup benched minor contributors — Chandler Simpson and Justin Crawford
 | Season RBI missed | 22 |
 | Season SB missed | 3 |
 | **Total counting missed** | **57** |
-| Avg R missed / manual day | 1.45 |
-| Avg HR missed / manual day | 0.15 |
-| Avg RBI missed / manual day | 1.10 |
-| Avg SB missed / manual day | 0.15 |
+| Avg R missed / manual day | 2.07 |
+| Avg HR missed / manual day | 0.21 |
+| Avg RBI missed / manual day | 1.57 |
+| Avg SB missed / manual day | 0.21 |
 
 | Date | Player | R | HR | RBI | SB | OPS | Total |
 |---|---|---|---|---|---|---|---|
@@ -144,207 +146,205 @@ All Rise's real bench problem is manual decisions — nine times the damage of Q
 | SVHD total | 6 | 7 | Manual +1 |
 | SVHD avg/day | 0.375 | 0.350 | QL +0.025/day |
 
-All Rise's pitching staff performs better on Quick Lineup days. No pitching cost from QL — the QS gap reflects when starts happen to fall, not a lineup decision effect.
+All Rise's pitching staff performs better on Quick Lineup days. No pitching cost from QL.
 
 ---
 
 ### Big Dumpers
 
-**Quick Lineup usage:** 20 of 36 days (55.6%)
+**Quick Lineup usage:** 28 of 36 days (77.8%)
 
 #### Bench Misses: Quick Lineup-Placed
 
 | Metric | Value |
 |---|---|
-| Season R missed | 21 |
-| Season HR missed | 9 |
-| Season RBI missed | 25 |
-| Season SB missed | 3 |
-| **Total counting missed** | **58** |
-| Avg R missed / QL day | 1.05 |
-| Avg HR missed / QL day | 0.45 |
-| Avg RBI missed / QL day | 1.25 |
-| Avg SB missed / QL day | 0.15 |
+| Season R missed | 26 |
+| Season HR missed | 10 |
+| Season RBI missed | 32 |
+| Season SB missed | 4 |
+| **Total counting missed** | **72** |
+| Avg R missed / QL day | 0.93 |
+| Avg HR missed / QL day | 0.36 |
+| Avg RBI missed / QL day | 1.14 |
+| Avg SB missed / QL day | 0.14 |
 
 | Date | Player | R | HR | RBI | SB | OPS | Total |
 |---|---|---|---|---|---|---|---|
 | 2026-04-02 | Jonathan India | 1 | 1 | 5 | 0 | 1.400 | 7 |
+| 2026-04-16 | Trevor Story | 1 | 1 | 5 | 0 | 2.100 | 7 |
 | 2026-04-29 | Pete Crow-Armstrong | 2 | 1 | 3 | 0 | 1.400 | 6 |
 | 2026-04-07 | Jonathan India | 1 | 1 | 3 | 0 | 1.750 | 5 |
 | 2026-03-31 | Ian Happ | 2 | 1 | 1 | 0 | 1.400 | 4 |
-| 2026-04-15 | Jordan Beck | 2 | 1 | 1 | 0 | 1.400 | 4 |
 
-Big Dumpers is the clearest case in the league of Quick Lineup causing real damage. Jonathan India benched by QL twice — 12 combined counting stats across those two games (1 HR, 8 RBI) — is a category-swinging cost on RBI. At 1.25 RBI/QL day missed, QL is consistently leaving runs on the bench.
+Big Dumpers is the clearest case of Quick Lineup causing real damage. Trevor Story's 7-count game on 2026-04-16 was a `CPU_USER_INITIATED` batch — correctly attributed to QL, not a manual call. Jonathan India benched twice by QL (12 combined counting stats). At 1.14 RBI/QL day missed, this is the highest QL cost per day in the league.
 
 #### Bench Misses: Manually Placed
 
 | Metric | Value |
 |---|---|
-| Season R missed | 5 |
-| Season HR missed | 1 |
-| Season RBI missed | 7 |
-| Season SB missed | 1 |
-| **Total counting missed** | **14** |
-| Avg R missed / manual day | 0.31 |
-| Avg HR missed / manual day | 0.06 |
-| Avg RBI missed / manual day | 0.44 |
-| Avg SB missed / manual day | 0.06 |
+| Season R missed | 0 |
+| Season HR missed | 0 |
+| Season RBI missed | 0 |
+| Season SB missed | 0 |
+| **Total counting missed** | **0** |
+| Avg R missed / manual day | 0.00 |
+| Avg HR missed / manual day | 0.00 |
+| Avg RBI missed / manual day | 0.00 |
+| Avg SB missed / manual day | 0.00 |
 
 | Date | Player | R | HR | RBI | SB | OPS | Total |
 |---|---|---|---|---|---|---|---|
-| 2026-04-16 | Trevor Story | 1 | 1 | 5 | 0 | 2.100 | 7 |
-| 2026-04-18 | Marcus Semien | 1 | 0 | 1 | 0 | 1.250 | 2 |
-| 2026-04-15 | Zach McKinstry | 1 | 0 | 0 | 0 | 1.000 | 1 |
-| 2026-04-16 | Marcus Semien | 0 | 0 | 1 | 0 | 0.833 | 1 |
-| 2026-04-17 | Jonathan India | 1 | 0 | 0 | 0 | 0.750 | 1 |
+| 2026-04-06 | Jorge Polanco | 0 | 0 | 0 | 0 | 1.250 | 0 |
+| 2026-04-06 | Jordan Beck | 0 | 0 | 0 | 0 | 0.000 | 0 |
+| 2026-04-08 | Jorge Polanco | 0 | 0 | 0 | 0 | 1.000 | 0 |
+| 2026-04-08 | Jordan Beck | 0 | 0 | 0 | 0 | 0.000 | 0 |
+| 2026-04-09 | Jorge Polanco | 0 | 0 | 0 | 0 | 0.000 | 0 |
 
-Trevor Story's 2026-04-16 (1 HR, 5 RBI, 2.100 OPS) while manually benched is the standout single miss. Manual decisions account for about a quarter of total damage — QL is the primary culprit here.
+Zero missed production from manual placements. Every bench player set by human choice produced nothing in their benched game. The entire bench cost on this team comes from Quick Lineup.
 
 #### Pitching (Active Slots): QS and SVHD
 
 | Metric | Quick Lineup | Manual | Gap |
 |---|---|---|---|
-| Days | 20 | 16 | — |
-| QS total | 7 | 10 | Manual +3 |
-| QS avg/day | 0.350 | 0.625 | Manual +0.275/day |
-| SVHD total | 6 | 8 | Manual +2 |
-| SVHD avg/day | 0.300 | 0.500 | Manual +0.200/day |
-| Season opp cost | — | — | ~5.5 QS, ~4.0 SVHD |
+| Days | 27 | 9 | — |
+| QS total | 11 | 6 | — |
+| QS avg/day | 0.407 | 0.667 | Manual +0.260/day |
+| SVHD total | 10 | 4 | — |
+| SVHD avg/day | 0.370 | 0.444 | Manual +0.074/day |
+| Season opp cost | — | — | ~7.0 QS, ~2.0 SVHD |
 
-Big Dumpers compounds the batting cost with a pitching cost — manual days produce significantly more QS and SVHD. Across 20 QL days the rate gap represents roughly 5–6 missed Quality Starts.
+Manual days produce significantly more QS per day. Across 27 QL days the rate gap represents roughly 7 missed Quality Starts — compounding the batting bench cost.
 
 ---
 
 ### Big Papi
 
-**Quick Lineup usage:** 19 of 36 days (52.8%)
+**Quick Lineup usage:** 25 of 36 days (69.4%)
 
 #### Bench Misses: Quick Lineup-Placed
 
 | Metric | Value |
 |---|---|
-| Season R missed | 12 |
-| Season HR missed | 3 |
-| Season RBI missed | 5 |
-| Season SB missed | 4 |
-| **Total counting missed** | **24** |
-| Avg R missed / QL day | 0.63 |
-| Avg HR missed / QL day | 0.16 |
-| Avg RBI missed / QL day | 0.26 |
-| Avg SB missed / QL day | 0.21 |
+| Season R missed | 19 |
+| Season HR missed | 5 |
+| Season RBI missed | 10 |
+| Season SB missed | 5 |
+| **Total counting missed** | **39** |
+| Avg R missed / QL day | 0.76 |
+| Avg HR missed / QL day | 0.20 |
+| Avg RBI missed / QL day | 0.40 |
+| Avg SB missed / QL day | 0.20 |
 
 | Date | Player | R | HR | RBI | SB | OPS | Total |
 |---|---|---|---|---|---|---|---|
 | 2026-04-02 | Otto Lopez | 3 | 1 | 1 | 0 | 2.350 | 5 |
 | 2026-04-02 | Ramon Laureano | 2 | 1 | 2 | 0 | 1.750 | 5 |
+| 2026-04-26 | Salvador Perez | 2 | 1 | 2 | 0 | 1.800 | 5 |
+| 2026-04-22 | Maikel Garcia | 2 | 0 | 1 | 1 | 0.933 | 4 |
 | 2026-04-09 | Ramon Laureano | 1 | 0 | 0 | 2 | 0.800 | 3 |
-| 2026-04-11 | Wyatt Langford | 1 | 1 | 1 | 0 | 1.667 | 3 |
-| 2026-03-29 | Otto Lopez | 1 | 0 | 0 | 1 | 0.500 | 2 |
 
-Ramon Laureano appears twice in QL misses — QL repeatedly undervalues his mixed-category contributions. Otto Lopez's 2026-04-02 game (5 counting stats, 2.350 OPS) is the single biggest QL miss on this team.
+Ramon Laureano appears twice in QL misses. Salvador Perez and Maikel Garcia were previously miscounted as manual — both were `CPU_USER_INITIATED` batch moves. Otto Lopez's 2026-04-02 game (5 counting stats, 2.350 OPS) remains the single biggest QL miss on this team.
 
 #### Bench Misses: Manually Placed
 
 | Metric | Value |
 |---|---|
-| Season R missed | 18 |
-| Season HR missed | 4 |
-| Season RBI missed | 17 |
-| Season SB missed | 3 |
-| **Total counting missed** | **42** |
-| Avg R missed / manual day | 1.06 |
-| Avg HR missed / manual day | 0.24 |
-| Avg RBI missed / manual day | 1.00 |
-| Avg SB missed / manual day | 0.18 |
+| Season R missed | 11 |
+| Season HR missed | 2 |
+| Season RBI missed | 12 |
+| Season SB missed | 2 |
+| **Total counting missed** | **27** |
+| Avg R missed / manual day | 2.20 |
+| Avg HR missed / manual day | 0.40 |
+| Avg RBI missed / manual day | 2.40 |
+| Avg SB missed / manual day | 0.40 |
 
 | Date | Player | R | HR | RBI | SB | OPS | Total |
 |---|---|---|---|---|---|---|---|
 | 2026-04-15 | Jake Bauers | 1 | 1 | 3 | 0 | 1.400 | 5 |
-| 2026-04-26 | Salvador Perez | 2 | 1 | 2 | 0 | 1.800 | 5 |
 | 2026-04-06 | TJ Rumfield | 1 | 1 | 2 | 0 | 1.250 | 4 |
 | 2026-04-19 | Lawrence Butler | 1 | 0 | 1 | 2 | 1.267 | 4 |
-| 2026-04-22 | Maikel Garcia | 2 | 0 | 1 | 1 | 0.933 | 4 |
+| 2026-04-01 | Wyatt Langford | 1 | 0 | 1 | 0 | 1.200 | 2 |
+| 2026-04-06 | Jake Bauers | 1 | 0 | 1 | 0 | 3.000 | 2 |
 
-Manual decisions account for nearly double the missed production of QL. At 1.00 RBI/manual day missed, the bench audit habit would have the biggest impact for this team.
+QL accounts for more total missed production (39 vs 27). The manual average per day is high because there are only 5 days where manual decisions were made — each one carried significant weight.
 
 #### Pitching (Active Slots): QS and SVHD
 
 | Metric | Quick Lineup | Manual | Gap |
 |---|---|---|---|
-| Days | 19 | 17 | — |
-| QS total | 4 | 7 | Manual +3 |
-| QS avg/day | 0.211 | 0.412 | Manual +0.201/day |
-| SVHD total | 8 | 13 | Manual +5 |
-| SVHD avg/day | 0.421 | 0.765 | Manual +0.344/day |
-| Season opp cost | — | — | ~3.8 QS, ~6.5 SVHD |
+| Days | 24 | 12 | — |
+| QS total | 7 | 4 | — |
+| QS avg/day | 0.292 | 0.333 | Manual +0.041/day |
+| SVHD total | 12 | 9 | — |
+| SVHD avg/day | 0.500 | 0.750 | Manual +0.250/day |
+| Season opp cost | — | — | ~1.0 QS, ~6.0 SVHD |
 
-The largest SVHD gap in the league. Big Papi's bullpen produces nearly half the holds/saves on QL days — roughly 6–7 missed SVHD at the season level.
+QS gap is nearly neutral; the real pitching cost is SVHD. At 0.250 SVHD/day gap across 24 QL days, roughly 6 holds/saves were missed on Quick Lineup days.
 
 ---
 
 ### Datalickmyballs
 
-**Quick Lineup usage:** 20 of 36 days (55.6%)
+**Quick Lineup usage:** 30 of 36 days (83.3%)
 
 #### Bench Misses: Quick Lineup-Placed
 
 | Metric | Value |
 |---|---|
-| Season R missed | 18 |
-| Season HR missed | 2 |
-| Season RBI missed | 10 |
-| Season SB missed | 5 |
-| **Total counting missed** | **35** |
-| Avg R missed / QL day | 0.90 |
-| Avg HR missed / QL day | 0.10 |
-| Avg RBI missed / QL day | 0.50 |
-| Avg SB missed / QL day | 0.25 |
+| Season R missed | 32 |
+| Season HR missed | 5 |
+| Season RBI missed | 17 |
+| Season SB missed | 7 |
+| **Total counting missed** | **61** |
+| Avg R missed / QL day | 1.07 |
+| Avg HR missed / QL day | 0.17 |
+| Avg RBI missed / QL day | 0.57 |
+| Avg SB missed / QL day | 0.23 |
 
 | Date | Player | R | HR | RBI | SB | OPS | Total |
 |---|---|---|---|---|---|---|---|
+| 2026-04-27 | Gleyber Torres | 3 | 1 | 2 | 0 | 1.800 | 6 |
 | 2026-04-09 | Hunter Goodman | 3 | 1 | 1 | 1 | 2.800 | 6 |
 | 2026-04-05 | Giancarlo Stanton | 1 | 0 | 2 | 1 | 0.933 | 4 |
 | 2026-04-05 | Gleyber Torres | 2 | 1 | 1 | 0 | 1.850 | 4 |
-| 2026-03-29 | Trent Grisham | 1 | 0 | 0 | 1 | 0.833 | 2 |
-| 2026-03-31 | Brenton Doyle | 2 | 0 | 0 | 0 | 1.667 | 2 |
+| 2026-04-16 | Jacob Wilson | 1 | 1 | 2 | 0 | 1.750 | 4 |
 
-Hunter Goodman's 3 R / 1 HR / 1 RBI / 1 SB (OPS 2.800) on 2026-04-09 while QL-benched is the biggest single-day QL miss in the entire league. Giancarlo Stanton in the top 5 suggests a recurring slot management problem.
+Hunter Goodman's 3 R / 1 HR / 1 RBI / 1 SB (OPS 2.800) on 2026-04-09 while QL-benched is one of the biggest single-day QL misses in the league. Torres and Jacob Wilson — previously miscounted as manual — were all `CPU_USER_INITIATED` batch moves. Giancarlo Stanton in the top 5 suggests a recurring slot management problem within the QL algorithm itself.
 
 #### Bench Misses: Manually Placed
 
 | Metric | Value |
 |---|---|
-| Season R missed | 14 |
-| Season HR missed | 3 |
-| Season RBI missed | 7 |
-| Season SB missed | 2 |
-| **Total counting missed** | **26** |
-| Avg R missed / manual day | 0.88 |
-| Avg HR missed / manual day | 0.19 |
-| Avg RBI missed / manual day | 0.44 |
-| Avg SB missed / manual day | 0.13 |
+| Season R missed | 0 |
+| Season HR missed | 0 |
+| Season RBI missed | 0 |
+| Season SB missed | 0 |
+| **Total counting missed** | **0** |
+| Avg R missed / manual day | 0.00 |
+| Avg HR missed / manual day | 0.00 |
+| Avg RBI missed / manual day | 0.00 |
+| Avg SB missed / manual day | 0.00 |
 
 | Date | Player | R | HR | RBI | SB | OPS | Total |
 |---|---|---|---|---|---|---|---|
-| 2026-04-27 | Gleyber Torres | 3 | 1 | 2 | 0 | 1.800 | 6 |
-| 2026-04-16 | Jacob Wilson | 1 | 1 | 2 | 0 | 1.750 | 4 |
-| 2026-04-19 | Jacob Wilson | 2 | 1 | 1 | 0 | 1.167 | 4 |
-| 2026-04-25 | Brenton Doyle | 1 | 0 | 0 | 1 | 0.833 | 2 |
-| 2026-04-30 | Jacob Wilson | 2 | 0 | 0 | 0 | 1.750 | 2 |
+| 2026-04-22 | Jazz Chisholm Jr. | 0 | 0 | 0 | 0 | 1.000 | 0 |
+| 2026-04-22 | Luke Raley | 0 | 0 | 0 | 0 | 0.000 | 0 |
 
-Jacob Wilson appears three times in the manual miss list — a recurring failure to start an ascending hitter. Torres appearing in both QL and manual top 5 suggests a systemic slot management issue with that player regardless of how the lineup is set.
+Zero missed production from manual placements. On the rare occasion a human set the bench, the benched players produced nothing. The entire bench cost comes from Quick Lineup — driven by using it on 83.3% of days.
 
 #### Pitching (Active Slots): QS and SVHD
 
 | Metric | Quick Lineup | Manual | Gap |
 |---|---|---|---|
-| Days | 20 | 16 | — |
-| QS total | 13 | 8 | QL +5 |
-| QS avg/day | 0.650 | 0.500 | QL +0.150/day |
-| SVHD total | 15 | 13 | QL +2 |
-| SVHD avg/day | 0.750 | 0.812 | Manual +0.062/day |
+| Days | 29 | 7 | — |
+| QS total | 16 | 5 | — |
+| QS avg/day | 0.552 | 0.714 | Manual +0.162/day |
+| SVHD total | 21 | 7 | — |
+| SVHD avg/day | 0.724 | 1.000 | Manual +0.276/day |
+| Season opp cost | — | — | ~4.7 QS, ~8.0 SVHD |
 
-One of the few teams where QL days outperform on QS. The pitching side is neutral-to-positive for QL; the damage is entirely on batting bench placement.
+With `CPU_USER_INITIATED` correctly classified as QL, Datalickmyballs's pitching picture reverses from prior analysis — manual days outperform on both QS and SVHD. The largest SVHD gap per day in the league (0.276/day), representing roughly 8 missed holds/saves across the QL days.
 
 ---
 
@@ -381,10 +381,10 @@ Only one QL-placed bench batter with a game all season. Quick Lineup is not the 
 | Season RBI missed | 25 |
 | Season SB missed | 3 |
 | **Total counting missed** | **67** |
-| Avg R missed / manual day | 1.13 |
-| Avg HR missed / manual day | 0.17 |
-| Avg RBI missed / manual day | 0.83 |
-| Avg SB missed / manual day | 0.10 |
+| Avg R missed / manual day | 1.48 |
+| Avg HR missed / manual day | 0.22 |
+| Avg RBI missed / manual day | 1.09 |
+| Avg SB missed / manual day | 0.13 |
 
 | Date | Player | R | HR | RBI | SB | OPS | Total |
 |---|---|---|---|---|---|---|---|
@@ -394,7 +394,7 @@ Only one QL-placed bench batter with a game all season. Quick Lineup is not the 
 | 2026-04-06 | Carlos Correa | 2 | 0 | 1 | 1 | 0.900 | 4 |
 | 2026-04-25 | Wilyer Abreu | 2 | 1 | 1 | 0 | 2.000 | 4 |
 
-Jake Burger's 2026-04-14 game (2 HR, 4 RBI, 2.600 OPS) — the single largest missed performance in the entire league — was a **manual bench decision**, not Quick Lineup. At 1.13 R/manual day missed, Dingers Only's manager decisions are consistently leaving runs on the table.
+Jake Burger's 2026-04-14 game (2 HR, 4 RBI, 2.600 OPS) — the single largest missed performance in the entire league — was a **manual bench decision**, not Quick Lineup. At 1.48 R/manual day missed, Dingers Only's manager decisions are consistently leaving runs on the table.
 
 #### Pitching (Active Slots): QS and SVHD
 
@@ -410,7 +410,7 @@ With only 6 QL days the pitching sample is thin. Pitching production is not a co
 
 ### Midnight Muncy's
 
-**Quick Lineup usage:** 20 of 36 days (55.6%)
+**Quick Lineup usage:** 22 of 36 days (61.1%)
 
 #### Bench Misses: Quick Lineup-Placed
 
@@ -421,9 +421,9 @@ With only 6 QL days the pitching sample is thin. Pitching production is not a co
 | Season RBI missed | 3 |
 | Season SB missed | 0 |
 | **Total counting missed** | **6** |
-| Avg R missed / QL day | 0.10 |
+| Avg R missed / QL day | 0.09 |
 | Avg HR missed / QL day | 0.05 |
-| Avg RBI missed / QL day | 0.15 |
+| Avg RBI missed / QL day | 0.14 |
 | Avg SB missed / QL day | 0.00 |
 
 | Date | Player | R | HR | RBI | SB | OPS | Total |
@@ -434,7 +434,7 @@ With only 6 QL days the pitching sample is thin. Pitching production is not a co
 | 2026-04-23 | Juan Soto | 0 | 0 | 0 | 0 | 0.833 | 0 |
 | 2026-04-25 | Juan Soto | 0 | 0 | 0 | 0 | 0.500 | 0 |
 
-Jeremiah Jackson's 2026-04-18 game (5 counting stats) is the only meaningful QL-placed miss all season. Juan Soto appearing twice with zero counting stats in either game shows that even the near-misses are low-cost.
+Jeremiah Jackson's 2026-04-18 game (5 counting stats) is the only meaningful QL-placed miss all season. Juan Soto appearing twice with zero counting stats shows that even the near-misses are low-cost.
 
 #### Bench Misses: Manually Placed
 
@@ -447,26 +447,29 @@ Jeremiah Jackson's 2026-04-18 game (5 counting stats) is the only meaningful QL-
 | **Total counting missed** | **1** |
 | Avg R missed / manual day | 0.00 |
 | Avg HR missed / manual day | 0.00 |
-| Avg RBI missed / manual day | 0.06 |
+| Avg RBI missed / manual day | 0.17 |
 | Avg SB missed / manual day | 0.00 |
 
 | Date | Player | R | HR | RBI | SB | OPS | Total |
 |---|---|---|---|---|---|---|---|
 | 2026-03-29 | Kyle Manzardo | 0 | 0 | 1 | 0 | 0.400 | 1 |
+| 2026-03-29 | Spencer Steer | 0 | 0 | 0 | 0 | 0.200 | 0 |
+| 2026-04-02 | Jordan Walker | 0 | 0 | 0 | 0 | 0.000 | 0 |
+| 2026-04-04 | Coby Mayo | 0 | 0 | 0 | 0 | 0.000 | 0 |
 
-**The benchmark team.** Midnight Muncy's uses Quick Lineup 55.6% of days — tied for most in the league — and loses essentially nothing from either placement type. 7 total missed counting stats across all 36 days combined. This is what optimal roster management looks like.
+**The benchmark team.** Midnight Muncy's uses Quick Lineup 61.1% of days — tied for most in the league — and loses essentially nothing from either placement type. 7 total missed counting stats across all 36 days combined. This is what optimal roster management looks like.
 
 #### Pitching (Active Slots): QS and SVHD
 
 | Metric | Quick Lineup | Manual | Gap |
 |---|---|---|---|
-| Days | 20 | 16 | — |
-| QS total | 7 | 9 | Manual +2 |
-| QS avg/day | 0.350 | 0.562 | Manual +0.213/day |
-| SVHD total | 15 | 12 | QL +3 |
-| SVHD avg/day | 0.750 | 0.750 | Tied |
+| Days | 21 | 15 | — |
+| QS total | 8 | 8 | — |
+| QS avg/day | 0.381 | 0.533 | Manual +0.152/day |
+| SVHD total | 15 | 12 | — |
+| SVHD avg/day | 0.714 | 0.800 | Manual +0.086/day |
 
-SVHD is exactly tied. Even the benchmark team shows a slight QS edge for manual days — the one area with room to improve.
+Both QS and SVHD are slightly better on manual days. Even the benchmark team has a small pitching opportunity cost from QL — the one area with room to improve.
 
 ---
 
@@ -504,10 +507,10 @@ Zero missed production from QL placements. The two QL days both benched Alvarez,
 | Season RBI missed | 14 |
 | Season SB missed | 1 |
 | **Total counting missed** | **34** |
-| Avg R missed / manual day | 0.47 |
-| Avg HR missed / manual day | 0.09 |
-| Avg RBI missed / manual day | 0.41 |
-| Avg SB missed / manual day | 0.03 |
+| Avg R missed / manual day | 2.29 |
+| Avg HR missed / manual day | 0.43 |
+| Avg RBI missed / manual day | 2.00 |
+| Avg SB missed / manual day | 0.14 |
 
 | Date | Player | R | HR | RBI | SB | OPS | Total |
 |---|---|---|---|---|---|---|---|
@@ -517,7 +520,7 @@ Zero missed production from QL placements. The two QL days both benched Alvarez,
 | 2026-04-30 | Willi Castro | 2 | 0 | 1 | 0 | 1.350 | 3 |
 | 2026-04-11 | Ernie Clement | 1 | 0 | 1 | 0 | 1.250 | 2 |
 
-An additional 42 missed counting stats come from "default/carried-over" placements — Heliot Ramos (6, 5, and 3-count games) and Willi Castro (5-count game) sitting on a persistent bench state that was never revisited. That carried-over bench cost exceeds the manual cost.
+The manual average per day is very high (2.29 R, 2.00 RBI) because there are only 7 days where the manager explicitly set the lineup — each one mattered. An additional 42 missed counting stats come from "default/carried-over" placements — Heliot Ramos (6, 5, and 3-count games) and Willi Castro (5-count game) sitting on a persistent bench state that was never revisited. That carried-over bench cost exceeds the manual cost.
 
 #### Pitching (Active Slots): QS and SVHD
 
@@ -568,10 +571,10 @@ Minimal QL damage — just 4 counting stats total across 6 QL-placed bench appea
 | Season RBI missed | 11 |
 | Season SB missed | 5 |
 | **Total counting missed** | **31** |
-| Avg R missed / manual day | 0.52 |
-| Avg HR missed / manual day | 0.08 |
-| Avg RBI missed / manual day | 0.44 |
-| Avg SB missed / manual day | 0.20 |
+| Avg R missed / manual day | 0.68 |
+| Avg HR missed / manual day | 0.11 |
+| Avg RBI missed / manual day | 0.58 |
+| Avg SB missed / manual day | 0.26 |
 
 | Date | Player | R | HR | RBI | SB | OPS | Total |
 |---|---|---|---|---|---|---|---|
@@ -620,7 +623,7 @@ Mixed pitching picture — QL days slightly better on QS, manual days better on 
 | 2026-04-22 | Jac Caglianone | 0 | 0 | 0 | 0 | 0.000 | 0 |
 | 2026-04-29 | Jac Caglianone | 0 | 0 | 0 | 0 | 0.000 | 0 |
 
-Near-zero QL batting cost. Caglianone appearing three times with no production in any game keeps QL damage negligible.
+Near-zero QL batting cost. Caglianone appearing three times with no production keeps QL damage negligible.
 
 #### Bench Misses: Manually Placed
 
@@ -631,10 +634,10 @@ Near-zero QL batting cost. Caglianone appearing three times with no production i
 | Season RBI missed | 7 |
 | Season SB missed | 1 |
 | **Total counting missed** | **15** |
-| Avg R missed / manual day | 0.26 |
+| Avg R missed / manual day | 0.35 |
 | Avg HR missed / manual day | 0.00 |
-| Avg RBI missed / manual day | 0.26 |
-| Avg SB missed / manual day | 0.04 |
+| Avg RBI missed / manual day | 0.35 |
+| Avg SB missed / manual day | 0.05 |
 
 | Date | Player | R | HR | RBI | SB | OPS | Total |
 |---|---|---|---|---|---|---|---|
@@ -651,11 +654,11 @@ Modest overall numbers. Luis Garcia Jr. appearing twice in manual misses is a re
 | Metric | Quick Lineup | Manual | Gap |
 |---|---|---|---|
 | Days | 9 | 27 | — |
-| QS total | 2 | 18 | Manual +16 |
-| QS avg/day | 0.222 | 0.750 | Manual +0.528/day |
-| SVHD total | 4 | 15 | Manual +11 |
-| SVHD avg/day | 0.444 | 0.625 | Manual +0.181/day |
-| Season opp cost | — | — | ~4.8 QS, ~1.6 SVHD |
+| QS total | 2 | 19 | Manual +17 |
+| QS avg/day | 0.222 | 0.704 | Manual +0.482/day |
+| SVHD total | 4 | 18 | Manual +14 |
+| SVHD avg/day | 0.444 | 0.667 | Manual +0.223/day |
+| Season opp cost | — | — | ~4.3 QS, ~2.0 SVHD |
 
 The worst pitching gap in the league. Despite minimal batting cost from QL, active pitchers produce far less on QL days. The biggest Quick Lineup opportunity cost for this team is on the mound, not at the plate.
 
@@ -696,10 +699,10 @@ The team uses Quick Lineup on just 1 day all season. QL cost is negligible.
 | Season RBI missed | 33 |
 | Season SB missed | 7 |
 | **Total counting missed** | **70** |
-| Avg R missed / manual day | 0.71 |
-| Avg HR missed / manual day | 0.14 |
-| Avg RBI missed / manual day | 0.94 |
-| Avg SB missed / manual day | 0.20 |
+| Avg R missed / manual day | 0.96 |
+| Avg HR missed / manual day | 0.19 |
+| Avg RBI missed / manual day | 1.27 |
+| Avg SB missed / manual day | 0.27 |
 
 | Date | Player | R | HR | RBI | SB | OPS | Total |
 |---|---|---|---|---|---|---|---|
@@ -709,17 +712,17 @@ The team uses Quick Lineup on just 1 day all season. QL cost is negligible.
 | 2026-04-04 | Tyler Soderstrom | 2 | 0 | 2 | 0 | 1.350 | 4 |
 | 2026-04-04 | Alec Bohm | 1 | 0 | 3 | 0 | 0.800 | 4 |
 
-The highest manual-placement missed total in the league (70 counting stats). Tyler Soderstrom appears twice — a recurring failure to start a productive bat. At 0.94 RBI/manual day missed, this is one of the costliest bench management patterns in the league.
+The highest manual-placement missed total in the league (70 counting stats). Tyler Soderstrom appears twice — a recurring failure to start a productive bat. At 1.27 RBI/manual day missed, this is one of the costliest bench management patterns in the league.
 
 #### Pitching (Active Slots): QS and SVHD
 
 | Metric | Quick Lineup | Manual | Gap |
 |---|---|---|---|
 | Days | 1 | 35 | — |
-| QS avg/day | 0.000 | 0.312 | (1 QL day — not comparable) |
-| SVHD avg/day | 2.000 | 0.594 | (1 QL day — not comparable) |
+| QS avg/day | 0.000 | 0.371 | (1 QL day — not comparable) |
+| SVHD avg/day | 2.000 | 0.629 | (1 QL day — not comparable) |
 
-One Quick Lineup day is insufficient for rate comparison. Pitching production is essentially entirely manual at 0.312 QS/day and 0.594 SVHD/day.
+One Quick Lineup day is insufficient for rate comparison. Pitching production is essentially entirely manual at 0.371 QS/day and 0.629 SVHD/day.
 
 ---
 
@@ -793,7 +796,7 @@ Work through your active slots using the category-aware ranked list from step 3.
 #### Step 5 — Bench audit
 Final check: every benched player either has no game today, or was explicitly ranked below the player in their slot in step 3. If any bench player with a game ranks above an active player at a compatible slot, swap them. This catches the greedy-algorithm failure mode directly — and the manual-decision failure mode too.
 
-The data shows that for most teams in this league, the bigger problem isn't Quick Lineup — it's manual decisions that leave productive players on the bench for multiple days without revisiting. Big Dumpers is the exception where QL is clearly the culprit (58 QL-placed missed counting stats). For everyone else, Step 5's bench audit applied to manual decisions is the highest-leverage habit change.
+The answer differs by team and QL usage rate. For the three heaviest Quick Lineup users — Big Dumpers (77.8% QL, 72 missed), Datalickmyballs (83.3% QL, 61 missed), and Big Papi (69.4% QL, 39 missed) — Quick Lineup is clearly the primary bench cost. For the other 7 teams, manual bench placement decisions cost more. Step 5's bench audit catches both failure modes: it prevents the greedy algorithm from locking in bad placements on QL days, and it catches the human tendency to leave productive bench players untouched across multiple days.
 
 ---
 
