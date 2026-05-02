@@ -14,6 +14,7 @@ description: Brief description of the project.
 permalink: /GROUP/project-permalink
 nav_order: X
 published: false
+nav_exclude: true
 ---
 
 ## Project Overview

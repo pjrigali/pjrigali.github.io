@@ -5,6 +5,8 @@ description: A data-driven draft strategy for the 2026 fantasy baseball season u
 permalink: /fantasy-baseball/draft-strategy-2026
 parent: Fantasy Baseball
 nav_order: 3
+published: false
+nav_exclude: true
 ---
 
 ## 2026 Fantasy Baseball Draft Strategy
