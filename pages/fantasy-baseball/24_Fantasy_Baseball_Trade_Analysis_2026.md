@@ -62,7 +62,7 @@ All statistics were pulled from a local data lake populated by MLB Stats API dai
 
 Players matched by MLB player_id (`682998` = Carroll, `693433` = Woo). QS uses the actual column from each daily file for 2023–2026; QS for the 2026 projection is estimated at 65% of GS (not included in the projection file).
 
-The full analysis script: [analyze_trade_carroll_woo.py](https://github.com/pjrigali/pjrigali.github.io/blob/main/temp_trade_analysis/analyze_trade_carroll_woo.py)
+The full analysis script: `fantasy_baseball/temp_trade_analysis/analyze_trade_carroll_woo.py`
 
 ---
 
