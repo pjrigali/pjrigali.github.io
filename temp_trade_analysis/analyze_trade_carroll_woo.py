@@ -1,20 +1,18 @@
 """
 Description:
     Trade analysis for Corbin Carroll (OF, ARI) vs Bryan Woo (SP, SEA).
-    Calculates fantasy points using the friend's league scoring system for:
-    - 2025 full season actuals
-    - 2026 YTD actuals
-    - 2026 full season projections (extrapolated + projected file)
+    Aggregates per-game box score stats across 2023-2026 from the MLB daily
+    stats files and applies the friend's league scoring system to produce a
+    like-for-like fantasy points comparison by year plus 2026 full-season
+    projections.
 
 Source Data:
-    - data-lake/01_Bronze/fantasy_baseball/stats_mlb_daily_2026.csv
-    - data-lake/01_Bronze/fantasy_baseball/mlb_hitting_2025_20260215.csv
-    - data-lake/01_Bronze/fantasy_baseball/mlb_pitching_2025_20260215.csv
+    - data-lake/01_Bronze/fantasy_baseball/stats_mlb_daily_{year}.csv  (2023-2026)
     - data-lake/01_Bronze/fantasy_baseball/player_batter_projections_2026.csv
     - data-lake/01_Bronze/fantasy_baseball/player_pitcher_projections_2026.csv
 
 Outputs:
-    Printed summary table to console.
+    Printed multi-year summary table to console.
 """
 
 import csv
@@ -22,12 +20,16 @@ from collections import defaultdict
 
 BASE = r"C:\Users\peter.rigali\Desktop\acn_repo\data-lake\01_Bronze\fantasy_baseball"
 
+CARROLL_ID = "682998"
+WOO_ID     = "693433"
+YEARS      = [2023, 2024, 2025, 2026]
+
 # ---------------------------------------------------------------------------
 # Scoring system (friend's league)
-# ---------------------------------------------------------------------------
 # Batting:  TB +1, BB +1, R +1, RBI +1, SB +1, K -1
-# Pitching: IP +3 (= OUTS×1), ER -2, W +2, L -2, SV +5, BS -1,
+# Pitching: OUTS x1 (= IP x3), ER -2, W +2, L -2, SV +5, BS -1,
 #           K +1, H -1, BB -1, QS +5, HD +2
+# ---------------------------------------------------------------------------
 
 def batter_pts(tb, bb, r, rbi, sb, k):
     return tb + bb + r + rbi + sb - k
@@ -42,191 +44,179 @@ def safe(val, default=0.0):
         return default
 
 # ---------------------------------------------------------------------------
-# 2026 YTD — aggregate from stats_mlb_daily_2026.csv
+# Column name normalisation — 2023/24/25 use camelCase, 2026 uses snake_case
 # ---------------------------------------------------------------------------
-CARROLL_ID = "682998"
-WOO_ID     = "693433"
 
-batter_cols = ["TB", "B_BB", "R", "RBI", "SB", "SO"]   # SO = batter strikeouts
-pitcher_cols = ["OUTS", "ER", "W", "L", "SV", "SVHD", "K", "P_H", "P_BB", "QS", "HLD"]
-
-carroll_2026 = defaultdict(float)
-woo_2026     = defaultdict(float)
-
-with open(f"{BASE}\\stats_mlb_daily_2026.csv", encoding="utf-8") as f:
-    reader = csv.DictReader(f)
-    for row in reader:
-        pid = row.get("player_id", "")
-        borp = row.get("b_or_p", "")
-        if pid == CARROLL_ID and borp == "batter":
-            for col in batter_cols:
-                carroll_2026[col] += safe(row.get(col, 0))
-            carroll_2026["G"] += 1
-        elif pid == WOO_ID and borp == "pitcher":
-            for col in pitcher_cols:
-                woo_2026[col] += safe(row.get(col, 0))
-            woo_2026["GS"] += safe(row.get("GS", 0))
-            woo_2026["G"]  += 1
-
-# Blown saves: SVHD includes saves+holds; SV is separate saves — approximate BS from data
-# The mlb_daily file doesn't have a direct BS column; use 0 as placeholder
-carroll_pts_2026 = batter_pts(
-    carroll_2026["TB"], carroll_2026["B_BB"], carroll_2026["R"],
-    carroll_2026["RBI"], carroll_2026["SB"], carroll_2026["SO"]
-)
-woo_pts_2026 = pitcher_pts(
-    woo_2026["OUTS"], woo_2026["ER"], woo_2026["W"], woo_2026["L"],
-    woo_2026["SV"], 0, woo_2026["K"], woo_2026["P_H"],
-    woo_2026["P_BB"], woo_2026["QS"], woo_2026["HLD"]
-)
-
-games_carroll = int(carroll_2026["G"]) or 1
-starts_woo    = int(woo_2026["G"]) or 1
+def get_player_id(row):
+    return row.get("playerId") or row.get("player_id", "")
 
 # ---------------------------------------------------------------------------
-# 2025 actuals — mlb_hitting/pitching_2025
+# Aggregate yearly stats from stats_mlb_daily_{year}.csv
 # ---------------------------------------------------------------------------
-carroll_2025 = {}
-with open(f"{BASE}\\mlb_hitting_2025_20260215.csv", encoding="utf-8") as f:
-    reader = csv.DictReader(f)
-    for row in reader:
-        if row.get("player_id") == CARROLL_ID or row.get("player_name") == "Corbin Carroll":
-            carroll_2025 = row
-            break
 
-woo_2025 = {}
-with open(f"{BASE}\\mlb_pitching_2025_20260215.csv", encoding="utf-8") as f:
-    reader = csv.DictReader(f)
-    for row in reader:
-        if row.get("player_id") == WOO_ID or row.get("player_name") == "Bryan Woo":
-            woo_2025 = row
-            break
+BATTER_COLS  = ["TB", "B_BB", "R", "RBI", "SB", "SO"]
+PITCHER_COLS = ["OUTS", "ER", "W", "L", "SV", "K", "P_H", "P_BB", "QS", "HLD"]
 
-def carroll_pts_from_season(row):
-    tb  = safe(row.get("totalBases"))
-    bb  = safe(row.get("baseOnBalls"))
-    r   = safe(row.get("runs"))
-    rbi = safe(row.get("rbi"))
-    sb  = safe(row.get("stolenBases"))
-    k   = safe(row.get("strikeOuts"))
-    return batter_pts(tb, bb, r, rbi, sb, k), tb, bb, r, rbi, sb, k
+def aggregate_year(year):
+    path = f"{BASE}\\stats_mlb_daily_{year}.csv"
+    carroll = defaultdict(float)
+    woo     = defaultdict(float)
 
-def woo_pts_from_season(row):
-    ip   = safe(row.get("inningsPitched"))
-    outs = ip * 3
-    er   = safe(row.get("earnedRuns"))
-    w    = safe(row.get("wins"))
-    l    = safe(row.get("losses"))
-    sv   = safe(row.get("saves"))
-    k    = safe(row.get("strikeOuts"))
-    h    = safe(row.get("hits"))
-    bb   = safe(row.get("baseOnBalls"))
-    gs   = safe(row.get("gamesStarted"))
-    # qualityStarts not in mlb_pitching file — estimate at 65% of GS for a sub-3 ERA SP
-    qs   = round(gs * 0.65)
-    hd   = safe(row.get("holds", 0))
-    bs   = safe(row.get("blownSaves", 0))
-    return pitcher_pts(outs, er, w, l, sv, bs, k, h, bb, qs, hd), ip, er, w, l, sv, k, h, bb, qs, hd
+    with open(path, encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            pid  = get_player_id(row)
+            borp = row.get("b_or_p", "")
 
-pts_carroll_2025, tb25, bb25, r25, rbi25, sb25, k25 = carroll_pts_from_season(carroll_2025)
-pts_woo_2025, ip25, er25, w25, l25, sv25, k25p, h25, bb25p, qs25, hd25 = woo_pts_from_season(woo_2025)
+            if pid == CARROLL_ID and borp == "batter":
+                for col in BATTER_COLS:
+                    carroll[col] += safe(row.get(col, 0))
+                carroll["G"] += 1
 
-g25_c = safe(carroll_2025.get("gamesPlayed", 162)) or 162
-gs25_w = safe(woo_2025.get("gamesStarted", 30)) or 30
+            elif pid == WOO_ID and borp == "pitcher":
+                for col in PITCHER_COLS:
+                    woo[col] += safe(row.get(col, 0))
+                woo["GS"] += safe(row.get("GS", 0))
+                woo["G"]  += 1
+
+    return carroll, woo
 
 # ---------------------------------------------------------------------------
-# 2026 projections
+# 2026 full-season projections
 # ---------------------------------------------------------------------------
-carroll_proj = {}
-with open(f"{BASE}\\player_batter_projections_2026.csv", encoding="utf-8-sig") as f:
-    reader = csv.DictReader(f)
-    for row in reader:
-        name = row.get("Player", "").replace("\xa0", " ")
-        if "Carroll" in name:
-            carroll_proj = row
-            break
 
-woo_proj = {}
-with open(f"{BASE}\\player_pitcher_projections_2026.csv", encoding="utf-8-sig") as f:
-    reader = csv.DictReader(f)
-    for row in reader:
-        name = row.get("Player", "").replace("\xa0", " ")
-        if "Woo" in name and "Bryan" in name:
-            woo_proj = row
-            break
+def load_carroll_proj():
+    with open(f"{BASE}\\player_batter_projections_2026.csv", encoding="utf-8-sig") as f:
+        for row in csv.DictReader(f):
+            if "Carroll" in row.get("Player", "").replace("\xa0", " "):
+                h   = safe(row["H"])
+                hr  = safe(row["HR"])
+                b2  = safe(row["2B"])
+                b3  = safe(row["3B"])
+                tb  = h + b2 + (2 * b3) + (3 * hr)
+                bb  = safe(row["BB"])
+                r   = safe(row["R"])
+                rbi = safe(row["RBI"])
+                sb  = safe(row["SB"])
+                k   = safe(row["SO"])
+                pts = batter_pts(tb, bb, r, rbi, sb, k)
+                return {"TB": tb, "B_BB": bb, "R": r, "RBI": rbi,
+                        "SB": sb, "SO": k, "pts": pts, "G": 145}
+    return {}
 
-def carroll_pts_from_proj(row):
-    # Projection file headers: Player,AB,R,HR,RBI,SB,AVG,OBP,H,2B,3B,BB,SO,SLG,OPS
-    h   = safe(row.get("H"))
-    hr  = safe(row.get("HR"))
-    b2  = safe(row.get("2B"))
-    b3  = safe(row.get("3B"))
-    tb  = h + b2 + (2 * b3) + (3 * hr)   # TB = H + 2B + 2*3B + 3*HR
-    bb  = safe(row.get("BB"))
-    r   = safe(row.get("R"))
-    rbi = safe(row.get("RBI"))
-    sb  = safe(row.get("SB"))
-    k   = safe(row.get("SO"))
-    return batter_pts(tb, bb, r, rbi, sb, k), tb, bb, r, rbi, sb, k
-
-def woo_pts_from_proj(row):
-    # Projection file headers: Player,IP,K,W,SV,ERA,WHIP,ER,H,BB,HR,G,GS,L,CG
-    ip   = safe(row.get("IP"))
-    outs = ip * 3
-    er   = safe(row.get("ER"))
-    w    = safe(row.get("W"))
-    l    = safe(row.get("L"))
-    sv   = safe(row.get("SV"))
-    k    = safe(row.get("K"))
-    h    = safe(row.get("H"))
-    bb   = safe(row.get("BB"))
-    gs   = safe(row.get("GS"))
-    qs   = gs * 0.65   # approx QS as 65% of GS for a good SP
-    hd   = 0
-    bs   = 0
-    return pitcher_pts(outs, er, w, l, sv, bs, k, h, bb, qs, hd), ip, er, w, l, sv, k, h, bb, qs
-
-pts_carroll_proj, tb_p, bb_p, r_p, rbi_p, sb_p, k_p = carroll_pts_from_proj(carroll_proj)
-pts_woo_proj, ip_p, er_p, w_p, l_p, sv_p, k_p2, h_p, bb_p2, qs_p = woo_pts_from_proj(woo_proj)
-gs_proj_woo = safe(woo_proj.get("GS", 31))
+def load_woo_proj():
+    with open(f"{BASE}\\player_pitcher_projections_2026.csv", encoding="utf-8-sig") as f:
+        for row in csv.DictReader(f):
+            name = row.get("Player", "").replace("\xa0", " ")
+            if "Woo" in name and "Bryan" in name:
+                ip  = safe(row["IP"])
+                er  = safe(row["ER"])
+                w   = safe(row["W"])
+                l   = safe(row["L"])
+                sv  = safe(row["SV"])
+                k   = safe(row["K"])
+                h   = safe(row["H"])
+                bb  = safe(row["BB"])
+                gs  = safe(row["GS"])
+                qs  = gs * 0.65        # QS not in projection file — estimate 65% of GS
+                pts = pitcher_pts(ip * 3, er, w, l, sv, 0, k, h, bb, qs, 0)
+                return {"OUTS": ip * 3, "ER": er, "W": w, "L": l, "SV": sv,
+                        "K": k, "P_H": h, "P_BB": bb, "QS": qs, "HLD": 0,
+                        "pts": pts, "GS": gs, "G": gs}
+    return {}
 
 # ---------------------------------------------------------------------------
-# Per-game pace calculations
+# Build results table
 # ---------------------------------------------------------------------------
-ppg_carroll_2026 = carroll_pts_2026 / games_carroll
-ppg_woo_2026     = woo_pts_2026 / starts_woo
-ppg_carroll_2025 = pts_carroll_2025 / g25_c
-ppg_woo_2025     = pts_woo_2025 / gs25_w
+
+results = {}
+for yr in YEARS:
+    c, w = aggregate_year(yr)
+    c_pts = batter_pts(c["TB"], c["B_BB"], c["R"], c["RBI"], c["SB"], c["SO"])
+    w_pts = pitcher_pts(w["OUTS"], w["ER"], w["W"], w["L"], w["SV"], 0,
+                        w["K"], w["P_H"], w["P_BB"], w["QS"], w["HLD"])
+    c["pts"] = c_pts
+    w["pts"] = w_pts
+    results[yr] = (c, w)
+
+carroll_proj = load_carroll_proj()
+woo_proj     = load_woo_proj()
 
 # ---------------------------------------------------------------------------
 # Print report
 # ---------------------------------------------------------------------------
-SEP = "=" * 70
+
+SEP = "=" * 78
 
 print(SEP)
-print("TRADE ANALYSIS: Corbin Carroll (OF/ARI)  vs  Bryan Woo (SP/SEA)")
-print("Scoring: TB+1 BB+1 R+1 RBI+1 SB+1 K-1 | IP×3 ER-2 W+2 L-2 SV+5 BS-1 K+1 H-1 BB-1 QS+5 HD+2")
+print("TRADE ANALYSIS: Corbin Carroll (OF/ARI)  for  Bryan Woo (SP/SEA)")
+print("Scoring: TB+1 BB+1 R+1 RBI+1 SB+1 K-1 | OUTS+1 ER-2 W+2 L-2 SV+5 BS-1 K+1 H-1 BB-1 QS+5 HD+2")
 print(SEP)
 
+# --- Carroll multi-year ---
 print("\n--- CORBIN CARROLL (batter) ---")
-print(f"  2025 Season  : G={int(g25_c)}, TB={int(safe(carroll_2025.get('totalBases')))}, BB={int(bb25)}, R={int(r25)}, RBI={int(rbi25)}, SB={int(sb25)}, K={int(k25)}  →  {int(pts_carroll_2025)} pts  ({ppg_carroll_2025:.1f} pts/game)")
-print(f"  2026 YTD     : G={games_carroll}, TB={int(carroll_2026['TB'])}, BB={int(carroll_2026['B_BB'])}, R={int(carroll_2026['R'])}, RBI={int(carroll_2026['RBI'])}, SB={int(carroll_2026['SB'])}, K={int(carroll_2026['SO'])}  →  {int(carroll_pts_2026)} pts  ({ppg_carroll_2026:.1f} pts/game)")
-print(f"  2026 Proj    : TB={int(tb_p)}, BB={int(bb_p)}, R={int(r_p)}, RBI={int(rbi_p)}, SB={int(sb_p)}, K={int(k_p)}  →  {int(pts_carroll_proj)} pts proj season")
+print(f"  {'Year':<10} {'G':>4} {'TB':>5} {'BB':>4} {'R':>4} {'RBI':>4} {'SB':>4} {'K':>4} {'PTS':>6} {'PTS/G':>7}")
+print(f"  {'-'*62}")
+for yr in YEARS:
+    c = results[yr][0]
+    g = int(c["G"]) or 1
+    ppg = c["pts"] / g
+    label = f"{yr} YTD" if yr == 2026 else str(yr)
+    print(f"  {label:<10} {g:>4} {int(c['TB']):>5} {int(c['B_BB']):>4} {int(c['R']):>4} "
+          f"{int(c['RBI']):>4} {int(c['SB']):>4} {int(c['SO']):>4} {int(c['pts']):>6} {ppg:>7.1f}")
 
-print("\n--- BRYAN WOO (starter) ---")
-print(f"  2025 Season  : GS={int(gs25_w)}, IP={ip25:.1f}, ER={int(er25)}, W={int(w25)}, L={int(l25)}, SV={int(sv25)}, K={int(k25p)}, H={int(h25)}, BB={int(bb25p)}, QS={int(qs25)}, HD={int(hd25)}  →  {int(pts_woo_2025)} pts  ({ppg_woo_2025:.1f} pts/start)")
-print(f"  2026 YTD     : G={starts_woo}, OUTS={int(woo_2026['OUTS'])}, ER={int(woo_2026['ER'])}, W={int(woo_2026['W'])}, L={int(woo_2026['L'])}, K={int(woo_2026['K'])}, H={int(woo_2026['P_H'])}, BB={int(woo_2026['P_BB'])}, QS={int(woo_2026['QS'])}  →  {int(woo_pts_2026)} pts  ({ppg_woo_2026:.1f} pts/start)")
-print(f"  2026 Proj    : GS={int(gs_proj_woo)}, IP={ip_p:.1f}, ER={int(er_p)}, W={int(w_p)}, L={int(l_p)}, K={int(k_p2)}, H={int(h_p)}, BB={int(bb_p2)}, QS~{int(qs_p)}  →  {int(pts_woo_proj)} pts proj season")
+if carroll_proj:
+    g   = int(carroll_proj["G"])
+    ppg = carroll_proj["pts"] / g
+    print(f"  {'2026 Proj':<10} {'~'+str(g):>4} {int(carroll_proj['TB']):>5} {int(carroll_proj['B_BB']):>4} "
+          f"{int(carroll_proj['R']):>4} {int(carroll_proj['RBI']):>4} {int(carroll_proj['SB']):>4} "
+          f"{int(carroll_proj['SO']):>4} {int(carroll_proj['pts']):>6} {ppg:>7.1f}")
 
-print("\n--- PROJECTED FULL SEASON FANTASY POINTS COMPARISON ---")
-print(f"  Carroll 2026 pace  : {ppg_carroll_2026:.1f} pts/game × 162 games = {int(ppg_carroll_2026 * 162)} pts")
-print(f"  Woo 2026 pace      : {ppg_woo_2026:.1f} pts/start × {int(gs_proj_woo)} starts = {int(ppg_woo_2026 * gs_proj_woo)} pts")
-print(f"  Carroll proj file  : {int(pts_carroll_proj)} pts")
-print(f"  Woo proj file      : {int(pts_woo_proj)} pts")
+# --- Woo multi-year ---
+print(f"\n--- BRYAN WOO (starter) ---")
+print(f"  {'Year':<10} {'G':>4} {'IP':>6} {'ER':>4} {'W':>3} {'L':>3} {'K':>4} {'H':>4} {'BB':>4} {'QS':>4} {'PTS':>6} {'PTS/G':>7}")
+print(f"  {'-'*72}")
+for yr in YEARS:
+    w = results[yr][1]
+    g = int(w["G"]) or 1
+    ip = w["OUTS"] / 3
+    ppg = w["pts"] / g if g > 0 else 0
+    label = f"{yr} YTD" if yr == 2026 else str(yr)
+    print(f"  {label:<10} {g:>4} {ip:>6.1f} {int(w['ER']):>4} {int(w['W']):>3} {int(w['L']):>3} "
+          f"{int(w['K']):>4} {int(w['P_H']):>4} {int(w['P_BB']):>4} {int(w['QS']):>4} "
+          f"{int(w['pts']):>6} {ppg:>7.1f}")
 
-print("\n--- VERDICT ---")
-diff_proj = pts_woo_proj - pts_carroll_proj
-diff_pace = (ppg_woo_2026 * gs_proj_woo) - (ppg_carroll_2026 * 162)
-print(f"  Projected pts advantage (Woo over Carroll): {int(diff_proj)} pts (projection file)")
-print(f"  2026 pace advantage   (Woo over Carroll):   {int(diff_pace)} pts")
+if woo_proj:
+    g   = int(woo_proj["GS"])
+    ip  = woo_proj["OUTS"] / 3
+    ppg = woo_proj["pts"] / g
+    print(f"  {'2026 Proj':<10} {'~'+str(g):>4} {ip:>6.1f} {int(woo_proj['ER']):>4} {int(woo_proj['W']):>3} "
+          f"{int(woo_proj['L']):>3} {int(woo_proj['K']):>4} {int(woo_proj['P_H']):>4} "
+          f"{int(woo_proj['P_BB']):>4} {int(woo_proj['QS']):>4} {int(woo_proj['pts']):>6} {ppg:>7.1f}")
+
+# --- Head-to-head by year ---
+print(f"\n--- HEAD-TO-HEAD FANTASY POINTS BY YEAR ---")
+print(f"  {'Year':<10} {'Carroll':>10} {'Woo':>10} {'Woo Adv':>10} {'Carroll/G':>10} {'Woo/G':>8}")
+print(f"  {'-'*60}")
+for yr in YEARS:
+    c   = results[yr][0]
+    w   = results[yr][1]
+    cg  = int(c["G"]) or 1
+    wg  = int(w["G"]) or 1
+    label = f"{yr} YTD" if yr == 2026 else str(yr)
+    print(f"  {label:<10} {int(c['pts']):>10} {int(w['pts']):>10} "
+          f"{int(w['pts'] - c['pts']):>+10} {c['pts']/cg:>10.1f} {w['pts']/wg:>8.1f}")
+
+if carroll_proj and woo_proj:
+    c_pace = (results[2026][0]["pts"] / (int(results[2026][0]["G"]) or 1)) * 162
+    w_pace = (results[2026][1]["pts"] / (int(results[2026][1]["G"]) or 1)) * 31
+    print(f"  {'2026 Pace':<10} {int(c_pace):>10} {int(w_pace):>10} {int(w_pace - c_pace):>+10}")
+    print(f"  {'2026 Proj':<10} {int(carroll_proj['pts']):>10} {int(woo_proj['pts']):>10} "
+          f"{int(woo_proj['pts'] - carroll_proj['pts']):>+10}")
+
+print(f"\n  Notes:")
+print(f"  * QS uses actual QS column from stats_mlb_daily files for all years.")
+print(f"  * QS for 2026 projection estimated at 65% of GS (not in projection file).")
+print(f"  * Woo MLB debut was mid-2023 — partial season expected.")
+print(f"  * Carroll IDs as batter only; Woo as pitcher only.")
 print(SEP)
