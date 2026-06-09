@@ -6,7 +6,7 @@ parent: Fantasy Baseball
 permalink: /fantasy-baseball/trade-request-suarez-for-jazz-2026
 nav_order: 13
 published: true
-nav_exclude: false
+nav_exclude: true
 ---
 
 ## Trade Request: Eugenio Suarez for Jazz Chisholm Jr.

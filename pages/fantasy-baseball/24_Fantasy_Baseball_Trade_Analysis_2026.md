@@ -5,6 +5,7 @@ description: Data-driven trade evaluation — Corbin Carroll (OF/ARI) vs Bryan W
 permalink: /fantasy-baseball/trade-analysis-carroll-woo-2026
 parent: Fantasy Baseball
 nav_order: 11
+nav_exclude: true
 ---
 
 # ⚾ Trade Analysis: Corbin Carroll for Bryan Woo (2026)
