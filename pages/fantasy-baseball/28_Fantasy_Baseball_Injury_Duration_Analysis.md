@@ -5,7 +5,6 @@ description: Detailed analysis of actual player recovery time spent on the Injur
 permalink: /fantasy-baseball/injury-duration-analysis
 parent: Fantasy Baseball
 nav_order: 28
-nav_exclude: true
 ---
 
 # 🏥 Player Injury Duration Analysis
