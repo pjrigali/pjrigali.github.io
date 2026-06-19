@@ -177,7 +177,7 @@ The near-absence of wasted pickups is a positive league-wide signal — when man
 
 **Tanner Scott (#2, This Schlitt is Bazzanas → Skubal Snacks, Z = 3.69):** Dropped April 1, claimed by Skubal Snacks April 10. Scott became Skubal Snacks' 6th-best pickup (Z=3.40). This Schlitt is Bazzanas also dropped Bryce Elder (#3 pitcher drop) and Drew Rasmussen went to them after Big Papi's drop — the data reveals they were simultaneously shedding valuable arms and picking up others.
 
-**This Schlitt is Bazzanas** has the heaviest overall drop footprint: Miguel Vargas (#1 batter drop, gave to Midnight Muncy's), Wilyer Abreu (#3, to Dingers Only), Mickey Moniak (#5, to Skubal Snacks), Nolan Arenado (#6), Mauricio Dubon (#8), Tanner Scott (#2 pitcher), Bryce Elder (#3 pitcher), Juan Morillo (#9 pitcher). Despite ranking 6th in the pickups leaderboard, they were simultaneously rotating some of the most productive waiver players in the league out the door.
+**This Schlitt is Bazzanas** has the heaviest overall drop footprint: Wilyer Abreu (#3 batter, to Dingers Only), Mickey Moniak (#5, to Skubal Snacks), Nolan Arenado (#6), Mauricio Dubon (#8), Tanner Scott (#2 pitcher), Bryce Elder (#3 pitcher), Juan Morillo (#9 pitcher). Despite ranking 6th in the pickups leaderboard, they were simultaneously rotating some of the most productive waiver players in the league out the door.
 
 **Big Papi** dropped four players who contributed meaningfully elsewhere: Miguel Vargas (→ Midnight Muncy's, #1 worst drop), Trevor Megill (→ Shohei Me the Money, #4 pitcher), Drew Rasmussen (→ This Schlitt is Bazzanas, #5 pitcher), and Michael Wacha (→ All Rise, #8 pitcher). Their early-season roster churn cost them more in combined post-drop production than any other team.
 
