@@ -19,6 +19,7 @@ A small repo for updates and thoughts. Mostly Python.
 - [21_Fantasy Baseball League Roster Evaluation 2026](/fantasy-baseball/roster-evaluation-2026)
 - [22_Fantasy Baseball Rookie Valuation](/fantasy-baseball/rookie-valuation)
 - [23_Fantasy Baseball Quick Lineup Impact 2026](/fantasy-baseball/quick-lineup-impact-2026)
+- [32_Fantasy Baseball Scoring System Audit 2026](/fantasy-baseball/scoring-system-audit-2026)
 
 ### Kalshi & Markets
 - [05_Kalshi Jerome Powell Speech Prediction](/kalshi/fed-speech-prediction)
